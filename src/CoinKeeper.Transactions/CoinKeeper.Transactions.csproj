@@ -5,9 +5,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-  
+
     <ItemGroup>
-      <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+      <ProjectReference Include="..\Common\CoinKeeper.Common\CoinKeeper.Common.csproj" />
+      <ProjectReference Include="..\Common\CoinKeeper.Infrastructure\CoinKeeper.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
