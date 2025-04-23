@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Backend.Api", "src\CoinKeeper.Backend.Api\CoinKeeper.Backend.Api.csproj", "{DC680B36-74C3-4460-BA74-1B1122F04034}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{37297192-1FBB-4992-8239-32B29C25553B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{39251DEC-BB2C-4B5C-978B-A1EB48736D1D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5A351B6F-6BD9-42FF-AB0B-A41DE69D984E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Common", "src\Common\CoinKeeper.Common\CoinKeeper.Common.csproj", "{EB45FCE0-FDD8-4646-BB00-BE89F06C921B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC680B36-74C3-4460-BA74-1B1122F04034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC680B36-74C3-4460-BA74-1B1122F04034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC680B36-74C3-4460-BA74-1B1122F04034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC680B36-74C3-4460-BA74-1B1122F04034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB45FCE0-FDD8-4646-BB00-BE89F06C921B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB45FCE0-FDD8-4646-BB00-BE89F06C921B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB45FCE0-FDD8-4646-BB00-BE89F06C921B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB45FCE0-FDD8-4646-BB00-BE89F06C921B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC680B36-74C3-4460-BA74-1B1122F04034} = {37297192-1FBB-4992-8239-32B29C25553B}
+		{5A351B6F-6BD9-42FF-AB0B-A41DE69D984E} = {37297192-1FBB-4992-8239-32B29C25553B}
+		{EB45FCE0-FDD8-4646-BB00-BE89F06C921B} = {5A351B6F-6BD9-42FF-AB0B-A41DE69D984E}
+	EndGlobalSection
+EndGlobal
