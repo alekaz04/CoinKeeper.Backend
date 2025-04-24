@@ -1,7 +1,6 @@
 using AutoMapper;
-using CoinKeeper.Operations.Dto;
 
-namespace CoinKeeper.Operations.Mapper;
+namespace CoinKeeper.Operations;
 
 public class OperationMapper : Profile
 {

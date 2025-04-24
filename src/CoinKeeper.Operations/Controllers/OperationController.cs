@@ -1,6 +1,4 @@
 using CoinKeeper.Common;
-using CoinKeeper.Operations.Dto;
-using CoinKeeper.Operations.Handlers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoinKeeper.Operations;
