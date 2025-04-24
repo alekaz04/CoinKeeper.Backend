@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Common", "src\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Infrastructure", "src\Common\CoinKeeper.Infrastructure\CoinKeeper.Infrastructure.csproj", "{5BDE7FB5-2F44-4E5F-A3B8-05B3D9895BE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Transactions", "src\CoinKeeper.Transactions\CoinKeeper.Transactions.csproj", "{1699295A-952E-438B-871E-7BD81C1F34C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Operations", "src\CoinKeeper.Operations\CoinKeeper.Operations.csproj", "{1699295A-952E-438B-871E-7BD81C1F34C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

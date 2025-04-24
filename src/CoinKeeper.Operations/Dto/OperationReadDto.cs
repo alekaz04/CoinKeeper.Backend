@@ -1,6 +1,6 @@
-﻿namespace CoinKeeper.Transactions;
+﻿namespace CoinKeeper.Operations.Dto;
 
-public class Transaction
+public class OperationReadDto
 {
     public Guid Id { get; set; }
     public DateTimeOffset OperationTime { get; set; }

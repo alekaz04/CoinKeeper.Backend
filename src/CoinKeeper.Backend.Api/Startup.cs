@@ -23,7 +23,6 @@ public class Startup
 
         services.AddDbContext<DataContext>(x => x.UseNpgsql(Configuration.GetConnectionString(nameof(DataContext))));
 
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         services.AddOpenApi();
         services.AddSwaggerDocument(x =>
         {

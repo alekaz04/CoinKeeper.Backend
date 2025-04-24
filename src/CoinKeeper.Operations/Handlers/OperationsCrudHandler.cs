@@ -1,0 +1,29 @@
+﻿using AutoMapper;
+using CoinKeeper.Infrastructure;
+using CoinKeeper.Operations.Dto;
+using FluentValidation;
+
+namespace CoinKeeper.Operations.Handlers;
+
+public class OperationsCrudHandler
+{
+    private readonly IValidator<OperationCreateDto> _validator;
+    private readonly IMapper _mapper;
+    private readonly DataContext _context;
+
+    public OperationsCrudHandler(IValidator<OperationCreateDto> validator, IMapper mapper, DataContext context)
+    {
+        _validator = validator;
+        _mapper = mapper;
+        _context = context;
+    }
+
+    public async Task<Guid> CreateOperation(OperationCreateDto dto, CancellationToken cancellationToken)
+    {
+        _validator.ValidateAndThrow(dto);
+        var operation = _mapper.Map<Operation>(dto);
+        await _context.AddAsync(operation, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+        return operation.Id;
+    }
+}
