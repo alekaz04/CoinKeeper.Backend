@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Operations.Dto;
+using CoinKeeper.Operations.Dto;
 using FluentValidation;
 
 namespace CoinKeeper.Operations.Validators;

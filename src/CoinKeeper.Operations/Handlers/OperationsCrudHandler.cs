@@ -1,7 +1,9 @@
-﻿using AutoMapper;
+using AutoMapper;
+using CoinKeeper.Common;
 using CoinKeeper.Infrastructure;
 using CoinKeeper.Operations.Dto;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoinKeeper.Operations.Handlers;
 
@@ -25,5 +27,17 @@ public class OperationsCrudHandler
         await _context.AddAsync(operation, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
         return operation.Id;
+    }
+
+    public async Task<OperationReadDto> GetOperationById(Guid id, CancellationToken cancellationToken)
+    {
+        var operation = await _context.Set<Operation>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+        if (operation is null)
+        {
+            throw new CommonErrorException("Operation not found.");
+        }
+
+        return _mapper.Map<OperationReadDto>(operation);
     }
 }

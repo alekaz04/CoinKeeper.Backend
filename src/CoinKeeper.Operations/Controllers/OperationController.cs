@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Common;
+using CoinKeeper.Common;
 using CoinKeeper.Operations.Dto;
 using CoinKeeper.Operations.Handlers;
 using Microsoft.AspNetCore.Mvc;
@@ -18,5 +18,11 @@ public class OperationController : CommonApiController
     public async Task<Guid> CreateOperation([FromBody] OperationCreateDto dto, CancellationToken cancellationToken)
     {
         return await _handler.CreateOperation(dto, cancellationToken);
+    }
+
+    [HttpGet("/get/{id}")]
+    public async Task<OperationReadDto> GetOperation(Guid id, CancellationToken cancellationToken)
+    {
+        return await _handler.GetOperationById(id, cancellationToken);
     }
 }

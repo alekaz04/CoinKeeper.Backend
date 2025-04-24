@@ -1,4 +1,3 @@
-﻿using CoinKeeper.Operations.Dto;
 using CoinKeeper.Operations.Handlers;
 using CoinKeeper.Operations.Mapper;
 using CoinKeeper.Operations.Validators;
