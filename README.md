@@ -48,30 +48,6 @@ CoinKeeper — это бэкенд-сервис для управления ли
 - Система напоминаний
 - Визуализация данных
 
-## Установка и запуск
-
-### Требования
-- .NET 9 SDK
-- PostgreSQL
-- Docker (опционально)
-
-### Запуск проекта
-1. Клонировать репозиторий
-2. Настроить строку подключения к PostgreSQL в `src/CoinKeeper.Backend.Api/appsettings.json`
-3. Выполнить миграции базы данных:
-   ```
-   dotnet ef database update --project src/Common/CoinKeeper.Infrastructure --startup-project src/CoinKeeper.Backend.Api
-   ```
-4. Запустить проект:
-   ```
-   dotnet run --project src/CoinKeeper.Backend.Api
-   ```
-
-### Запуск через Docker
-```
-docker-compose up -d
-```
-
 ## Статус проекта
 
 Проект находится на ранней стадии разработки. Реализованы базовые компоненты инфраструктуры и основные функции управления финансовыми операциями.
