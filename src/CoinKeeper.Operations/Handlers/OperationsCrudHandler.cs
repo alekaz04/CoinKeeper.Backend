@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CoinKeeper.Common;
 using CoinKeeper.Infrastructure;
 using FluentValidation;
@@ -33,13 +34,16 @@ public class OperationsCrudHandler
 
     public async Task<OperationReadDto> GetOperationById(Guid id, CancellationToken cancellationToken)
     {
-        var operation = await _context.Set<Operation>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        var operation = await _context.Set<Operation>()
+            .AsNoTracking()
+            .ProjectTo<OperationReadDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         if (operation is null)
         {
             throw new CommonErrorException("Operation not found.");
         }
 
-        return _mapper.Map<OperationReadDto>(operation);
+        return operation;
     }
 }

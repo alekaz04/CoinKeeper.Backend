@@ -12,13 +12,13 @@ public class OperationController : CommonApiController
         _handler = handler;
     }
 
-    [HttpPost("/create")]
+    [HttpPost]
     public async Task<Guid> CreateOperation([FromBody] OperationCreateDto dto, CancellationToken cancellationToken)
     {
         return await _handler.CreateOperation(dto, cancellationToken);
     }
 
-    [HttpGet("/get/{id}")]
+    [HttpGet("{id}")]
     public async Task<OperationReadDto> GetOperation(Guid id, CancellationToken cancellationToken)
     {
         return await _handler.GetOperationById(id, cancellationToken);
