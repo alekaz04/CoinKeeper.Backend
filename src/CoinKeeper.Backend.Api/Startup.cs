@@ -1,3 +1,4 @@
+using CoinKeeper.Common;
 using CoinKeeper.Extensions.DependencyInjection;
 using CoinKeeper.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,8 @@ public class Startup
         {
             options.DocumentPath = "openapi/v1.json";
         });
+
+        app.UseMiddleware<ErrorMiddleware>();
 
         app.UseRouting();
         app.UseAuthentication().UseAuthorization();
