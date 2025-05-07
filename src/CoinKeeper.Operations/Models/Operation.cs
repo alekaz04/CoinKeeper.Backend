@@ -1,6 +1,8 @@
+using CoinKeeper.Common;
+
 namespace CoinKeeper.Operations;
 
-public class Operation
+public class Operation : IBaseEntity
 {
     public Guid Id { get; set; }
     public DateTimeOffset OperationTime { get; set; }
@@ -9,4 +11,8 @@ public class Operation
 
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
+    public bool IsDeleted { get; set; }
+    public Guid CategoryId { get; set; }
+
+    public Category? Category { get; set; }
 }
