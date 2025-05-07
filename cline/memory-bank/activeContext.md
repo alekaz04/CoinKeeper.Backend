@@ -18,7 +18,7 @@ The project is in the early stages of development, and my analysis is focused on
 
 2. **Report Format**:
    - Имя файла: `CoinKeeper_Analyse_DD_MM_YY.md` (где DD_MM_YY - дата анализа)
-   - Размещение: папка Analyse в корне проекта
+   - Размещение: папка cline/analyse
    - Структура: стандартные разделы с заголовками и подзаголовками
    - Дата анализа должна быть указана в начале файла
 
@@ -37,7 +37,7 @@ The project is in the early stages of development, and my analysis is focused on
    - Раздел 5: Заключение
 
 4. **Previous Analysis Review**:
-   - Перед новым анализом изучить предыдущие отчеты в папке Analyse
+   - Перед новым анализом изучить предыдущие отчеты в папке cline/analyse
    - Учитывать выводы и рекомендации из предыдущих анализов
    - Отмечать прогресс в решении ранее выявленных проблем
    - При анализе кода необходимо просматривать README.md файл и вносить небольшие корректировки по мере развития проекта

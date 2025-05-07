@@ -17,7 +17,7 @@
 
 ## Архитектура
 
-- **Backend:** .NET 8 Web API, EF Core, PostgreSQL.
+- **Backend:** .NET 9 Web API, EF Core, PostgreSQL.
 - **Документация:** Swagger/OpenAPI.
 - **Деплой:** Docker, docker-compose.
 - **Логирование:** Serilog.
