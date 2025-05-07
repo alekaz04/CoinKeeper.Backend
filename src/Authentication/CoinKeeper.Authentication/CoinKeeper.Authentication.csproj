@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\CoinKeeper.Common\CoinKeeper.Common.csproj" />
+      <ProjectReference Include="..\..\Common\CoinKeeper.Infrastructure\CoinKeeper.Infrastructure.csproj" />
+      <ProjectReference Include="..\CoinKeeper.Authentication.Domain\CoinKeeper.Authentication.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

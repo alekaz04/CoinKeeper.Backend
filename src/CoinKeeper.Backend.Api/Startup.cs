@@ -20,7 +20,8 @@ public class Startup
         services.AddControllers();
 
         services.AddCommon(Configuration)
-            .AddFinance();
+            .AddFinance()
+            .AddAuth();
 
         services.AddDbContext<DataContext>(x => x.UseNpgsql(Configuration.GetConnectionString(nameof(DataContext))));
 

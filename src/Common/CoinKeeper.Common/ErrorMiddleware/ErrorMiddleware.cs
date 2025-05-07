@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -24,6 +25,11 @@ public class ErrorMiddleware
             await _next.Invoke(context);
         }
         catch (CommonErrorException e)
+        {
+            _logger.LogError(e, e.Message);
+            await HandleException(context, e.Message, 400);
+        }
+        catch (ValidationException e)
         {
             _logger.LogError(e, e.Message);
             await HandleException(context, e.Message, 400);
