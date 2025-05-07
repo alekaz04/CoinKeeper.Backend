@@ -5,7 +5,7 @@ using CoinKeeper.Infrastructure;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoinKeeper.Operations;
+namespace CoinKeeper.Finance;
 
 public class OperationsCrudHandler
 {

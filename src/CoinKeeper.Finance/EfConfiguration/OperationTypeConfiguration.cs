@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CoinKeeper.Operations;
+namespace CoinKeeper.Finance;
 
 public class OperationTypeConfiguration : IEntityTypeConfiguration<Operation>
 {

@@ -1,7 +1,7 @@
 using CoinKeeper.Common;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoinKeeper.Operations;
+namespace CoinKeeper.Finance;
 
 public class OperationController : CommonApiController
 {

@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace CoinKeeper.Operations;
+namespace CoinKeeper.Finance;
 
 public class OperationMapper : Profile
 {

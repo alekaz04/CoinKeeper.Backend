@@ -1,4 +1,4 @@
-﻿namespace CoinKeeper.Common;
+namespace CoinKeeper.Common;
 
 public interface IBaseEntity
 {

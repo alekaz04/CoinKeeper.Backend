@@ -1,4 +1,4 @@
-namespace CoinKeeper.Operations;
+namespace CoinKeeper.Finance;
 
 public interface IOperation
 {

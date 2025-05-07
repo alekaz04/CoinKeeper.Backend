@@ -1,8 +1,8 @@
 using CoinKeeper.Common;
 
-namespace CoinKeeper.Operations;
+namespace CoinKeeper.Finance;
 
-public class Operation : IBaseEntity
+public class Operation : IBaseEntity, IOperation
 {
     public Guid Id { get; set; }
     public DateTimeOffset OperationTime { get; set; }

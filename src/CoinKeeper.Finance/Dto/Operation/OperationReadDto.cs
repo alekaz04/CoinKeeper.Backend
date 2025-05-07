@@ -1,4 +1,4 @@
-namespace CoinKeeper.Operations;
+namespace CoinKeeper.Finance;
 
 public class OperationReadDto : IOperation
 {
@@ -6,4 +6,5 @@ public class OperationReadDto : IOperation
     public DateTimeOffset OperationTime { get; set; }
     public decimal Amount { get; set; }
     public string Description { get; set; } = string.Empty;
+    public CategoryReadDto Category { get; set; }
 }
