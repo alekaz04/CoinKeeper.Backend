@@ -1,14 +1,14 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-
 namespace CoinKeeper.Extensions.DependencyInjection;
 
 public static class CommonServiceCollectionExtensions
 {
     public static IServiceCollection AddCommon(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddLogging(configuration);
+        services.AddLogging(configuration)
+            .AddSwaggerWithAuth();
         return services;
     }
 
@@ -21,6 +21,11 @@ public static class CommonServiceCollectionExtensions
 
         services.AddSerilog(log);
 
+        return services;
+    }
+
+    private static IServiceCollection AddSwaggerWithAuth(this IServiceCollection services)
+    {
         return services;
     }
 }

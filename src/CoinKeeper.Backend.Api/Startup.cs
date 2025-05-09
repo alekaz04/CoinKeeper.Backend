@@ -21,29 +21,14 @@ public class Startup
 
         services.AddCommon(Configuration)
             .AddFinance()
-            .AddAuth();
+            .AddAuth(Configuration);
 
         services.AddDbContext<DataContext>(x => x.UseNpgsql(Configuration.GetConnectionString(nameof(DataContext))));
-
-        services.AddOpenApi();
-        services.AddSwaggerDocument(x =>
-        {
-            x.Title = "Coin Keeper API";
-            x.Version = "0.0.0";
-            x.Description = "Coin Keeper API";
-        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        app.UseOpenApi(x =>
-        {
-            x.Path = "openapi/v1.json";
-        });
-        app.UseSwaggerUi(options =>
-        {
-            options.DocumentPath = "openapi/v1.json";
-        });
+        app.MapOpenApi();
 
         app.UseMiddleware<ErrorMiddleware>();
 
