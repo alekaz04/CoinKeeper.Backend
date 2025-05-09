@@ -1,10 +1,10 @@
-﻿using CoinKeeper.Authentication;
+using CoinKeeper.Authentication;
 using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Authentication.Mapper;
 using CoinKeeper.Authentication.Validators;
 using CoinKeeper.Common;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;

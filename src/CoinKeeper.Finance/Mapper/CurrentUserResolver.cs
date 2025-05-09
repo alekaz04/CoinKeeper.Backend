@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CoinKeeper.Authentication.Domain;
 
 namespace CoinKeeper.Finance;

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CoinKeeper.Infrastructure;
 using FluentValidation;
 

@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Common;
+using CoinKeeper.Common;
 
 namespace CoinKeeper.Authentication;
 

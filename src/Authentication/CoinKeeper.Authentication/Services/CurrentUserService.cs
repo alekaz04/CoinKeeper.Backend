@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Authentication.Domain;
+using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Common;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;

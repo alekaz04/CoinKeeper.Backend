@@ -1,4 +1,3 @@
-﻿using AutoMapper;
 using CoinKeeper.Common;
 using CoinKeeper.Infrastructure;
 using FluentValidation;

@@ -1,4 +1,4 @@
-﻿namespace CoinKeeper.Authentication.Domain;
+namespace CoinKeeper.Authentication.Domain;
 
 public interface ICurrentUser
 {

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoinKeeper.Authentication;
@@ -10,7 +10,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.HasKey(x => x.Id);
         builder.HasData(new List<User>()
         {
-            new User()
+            new()
             {
                 Id = new("00000000-0000-0000-0000-000000000001"),
                 Login = "dev",

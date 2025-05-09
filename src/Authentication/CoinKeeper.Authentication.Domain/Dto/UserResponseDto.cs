@@ -1,4 +1,4 @@
-﻿namespace CoinKeeper.Authentication;
+namespace CoinKeeper.Authentication;
 
 public class UserResponseDto
 {

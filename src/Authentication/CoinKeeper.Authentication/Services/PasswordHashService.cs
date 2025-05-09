@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+using System.Security.Cryptography;
 
 namespace CoinKeeper.Authentication;
 
@@ -23,7 +23,7 @@ public class PasswordHashService
         return new UserPasswordDto()
         {
             Password = Convert.ToBase64String(hash),
-            Salt =  Convert.ToBase64String(salt)
+            Salt = Convert.ToBase64String(salt)
         };
     }
 

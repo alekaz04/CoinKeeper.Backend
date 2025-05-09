@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Common;
+using CoinKeeper.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
