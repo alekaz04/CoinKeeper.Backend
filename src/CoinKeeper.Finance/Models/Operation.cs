@@ -1,3 +1,4 @@
+using CoinKeeper.Authentication;
 using CoinKeeper.Common;
 
 namespace CoinKeeper.Finance;
@@ -13,6 +14,9 @@ public class Operation : IBaseEntity, IOperation
     public DateTimeOffset UpdatedAt { get; set; }
     public bool IsDeleted { get; set; }
     public Guid CategoryId { get; set; }
-
     public Category? Category { get; set; }
+
+    public Guid UserId { get; set; }
+
+    public User? User { get; set; }
 }

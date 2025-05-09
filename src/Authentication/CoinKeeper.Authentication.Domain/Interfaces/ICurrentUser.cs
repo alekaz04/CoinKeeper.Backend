@@ -2,5 +2,5 @@
 
 public interface ICurrentUser
 {
-    public Task<Guid> GetCurrentUserId();
+    public Guid GetCurrentUserId();
 }

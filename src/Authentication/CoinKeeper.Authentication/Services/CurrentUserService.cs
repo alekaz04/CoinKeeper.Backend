@@ -14,7 +14,7 @@ public class CurrentUserService : ICurrentUser
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public Task<Guid> GetCurrentUserId()
+    public Guid GetCurrentUserId()
     {
         if (_httpContextAccessor.HttpContext is null)
         {
@@ -28,6 +28,6 @@ public class CurrentUserService : ICurrentUser
             throw new CommonErrorException("Claim User is not found");
         }
 
-        return Task.FromResult(new Guid(userIdClaim.Value));
+        return new Guid(userIdClaim.Value);
     }
 }

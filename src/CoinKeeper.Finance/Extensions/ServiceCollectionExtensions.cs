@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<CategoryCrudHandler>();
         services.AddValidatorsFromAssembly(typeof(OperationValidator).Assembly);
         services.AddAutoMapper(typeof(OperationMapper), typeof(CategoryMapper));
+        services.AddScoped<CurrentUserResolver>();
         return services;
     }
 }
