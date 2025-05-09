@@ -1,4 +1,5 @@
 using AutoMapper;
+using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Infrastructure;
 using FluentValidation;
 

@@ -1,5 +1,4 @@
-namespace CoinKeeper.Authentication;
-
+namespace CoinKeeper.Authentication.Domain;
 public class RequestUserDto
 {
     public string Login { get; set; } = null!;

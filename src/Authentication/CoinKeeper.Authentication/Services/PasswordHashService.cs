@@ -1,3 +1,4 @@
+using CoinKeeper.Authentication.Domain;
 using System.Security.Cryptography;
 
 namespace CoinKeeper.Authentication;

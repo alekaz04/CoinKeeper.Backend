@@ -1,9 +1,9 @@
-using CoinKeeper.Authentication;
-using CoinKeeper.Common;
+using CoinKeeper.Authentication.Domain;
+using CoinKeeper.Common.Domain;
 
 namespace CoinKeeper.Finance;
 
-public class Category : IBaseEntity, ICategory
+public class Category : IBaseEntity, IUserSpecifiedEntity, ICategory
 {
     public Guid Id { get; set; }
     public string CategoryName { get; set; } = null!;

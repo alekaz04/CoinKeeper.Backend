@@ -1,26 +1,10 @@
 using CoinKeeper.Common;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CoinKeeper.Finance;
 
-public class OperationController : CommonApiController
+public class OperationController : AbstractCrudController<Operation, OperationReadDto, OperationCreateDto>
 {
-    private readonly OperationsCrudHandler _handler;
-
-    public OperationController(OperationsCrudHandler handler)
+    public OperationController(AbstractCrudHandler<Operation, OperationReadDto, OperationCreateDto> handler) : base(handler)
     {
-        _handler = handler;
-    }
-
-    [HttpPost]
-    public async Task<Guid> CreateOperation([FromBody] OperationCreateDto dto, CancellationToken cancellationToken)
-    {
-        return await _handler.CreateOperation(dto, cancellationToken);
-    }
-
-    [HttpGet("{id}")]
-    public async Task<OperationReadDto> GetOperation(Guid id, CancellationToken cancellationToken)
-    {
-        return await _handler.GetOperationById(id, cancellationToken);
     }
 }

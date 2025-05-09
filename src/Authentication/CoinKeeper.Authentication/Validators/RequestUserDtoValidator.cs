@@ -1,3 +1,4 @@
+using CoinKeeper.Authentication.Domain;
 using FluentValidation;
 
 namespace CoinKeeper.Authentication.Validators;

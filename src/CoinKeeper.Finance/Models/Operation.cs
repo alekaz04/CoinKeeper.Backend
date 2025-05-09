@@ -1,9 +1,9 @@
-using CoinKeeper.Authentication;
-using CoinKeeper.Common;
+using CoinKeeper.Authentication.Domain;
+using CoinKeeper.Common.Domain;
 
 namespace CoinKeeper.Finance;
 
-public class Operation : IBaseEntity, IOperation
+public class Operation : IBaseEntity, IUserSpecifiedEntity, IOperation
 {
     public Guid Id { get; set; }
     public DateTimeOffset OperationTime { get; set; }
@@ -17,6 +17,5 @@ public class Operation : IBaseEntity, IOperation
     public Category? Category { get; set; }
 
     public Guid UserId { get; set; }
-
     public User? User { get; set; }
 }

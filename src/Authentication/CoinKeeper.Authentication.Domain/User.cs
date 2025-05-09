@@ -1,6 +1,6 @@
-using CoinKeeper.Common;
+using CoinKeeper.Common.Domain;
 
-namespace CoinKeeper.Authentication;
+namespace CoinKeeper.Authentication.Domain;
 
 public class User : IBaseEntity
 {

@@ -13,5 +13,11 @@
       <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1" />
     </ItemGroup>
+  
+    <ItemGroup>
+      <ProjectReference Include="..\..\Authentication\CoinKeeper.Authentication.Domain\CoinKeeper.Authentication.Domain.csproj" />
+      <ProjectReference Include="..\CoinKeeper.Common.Domain\CoinKeeper.Common.Domain.csproj" />
+      <ProjectReference Include="..\CoinKeeper.Infrastructure\CoinKeeper.Infrastructure.csproj" />
+    </ItemGroup>
 
 </Project>

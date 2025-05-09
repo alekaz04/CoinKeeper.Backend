@@ -1,3 +1,4 @@
+using CoinKeeper.Authentication.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,8 +15,8 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
             {
                 Id = new("00000000-0000-0000-0000-000000000001"),
                 Login = "dev",
-                PasswordHash = "Q08y4jlcPJN6+MU3bjZPPoIpGO/xH0GnEF+MVqmvDho=",
-                PasswordSalt = "wNszPuVwYXDza4aWzW75mg==",
+                PasswordHash = "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=",
+                PasswordSalt = "HPdneFiNa8P3C92uUdWLGA==",
                 LastActivityTime = new DateTimeOffset(2025, 1, 1, 1, 1, 1, TimeSpan.Zero),
                 CreatedAt = new DateTimeOffset(2025, 1, 1, 1, 1, 1, TimeSpan.Zero),
                 UpdatedAt = new DateTimeOffset(2025, 1, 1, 1, 1, 1, TimeSpan.Zero),

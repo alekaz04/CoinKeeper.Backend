@@ -1,3 +1,4 @@
+using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

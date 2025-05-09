@@ -5,8 +5,5 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\..\Common\CoinKeeper.Common.Domain\CoinKeeper.Common.Domain.csproj" />
-    </ItemGroup>
 
 </Project>
