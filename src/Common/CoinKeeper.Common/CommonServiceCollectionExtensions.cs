@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using Serilog;
 namespace CoinKeeper.Extensions.DependencyInjection;
 
@@ -26,6 +28,19 @@ public static class CommonServiceCollectionExtensions
 
     private static IServiceCollection AddSwaggerWithAuth(this IServiceCollection services)
     {
+        services.AddOpenApiDocument(options =>
+        {
+            options.AddSecurity("Bearer", new OpenApiSecurityScheme
+            {
+                Description = "",
+                Type = OpenApiSecuritySchemeType.Http,
+                In = OpenApiSecurityApiKeyLocation.Header,
+                Name = "Authorization",
+                Scheme = "Bearer",
+            });
+            options.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
+        });
+
         return services;
     }
 }

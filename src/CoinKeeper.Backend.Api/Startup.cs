@@ -28,7 +28,7 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        app.MapOpenApi();
+        app.UseSwagger();
 
         app.UseMiddleware<ErrorMiddleware>();
 

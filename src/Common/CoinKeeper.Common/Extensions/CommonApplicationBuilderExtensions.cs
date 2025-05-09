@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.OpenApi;
-using Scalar.AspNetCore;
 
 
 namespace CoinKeeper.Extensions.DependencyInjection;
 
 public static class CommonApplicationBuilderExtensions
 {
-    public static IApplicationBuilder UseScalar(this IApplicationBuilder app)
+    public static IApplicationBuilder UseSwagger(this IApplicationBuilder app)
     {
-
+        app.UseOpenApi();
+        app.UseSwaggerUi(options =>
+        {
+            options.Path = string.Empty;
+        });
         return app;
     }
 }
