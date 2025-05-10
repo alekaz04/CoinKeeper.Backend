@@ -32,12 +32,13 @@ When analyzing the codebase, evaluate how well each component adheres to its lay
 
 1. **API Design**: Evaluate adherence to RESTful API principles and JSON payload structure
 2. **Data Access**: Assess Entity Framework Core implementation with Code-First approach
-3. **Authentication**: Analyze planned JWT-based authentication (not yet implemented)
+3. **Authentication**: Analyze JWT-based authentication implementation and token management
 4. **Validation**: Review FluentValidation usage for input validation
 5. **Object Mapping**: Evaluate AutoMapper configuration for DTO-to-Entity mapping
 6. **Error Handling**: Assess centralized middleware for consistent error responses
 7. **Documentation**: Review Swagger/OpenAPI implementation for API documentation
 8. **Containerization**: Analyze Docker configuration for deployment
+9. **User Context**: Evaluate CurrentUserService implementation and integration
 
 ## Design Pattern Analysis
 
@@ -116,10 +117,11 @@ Evaluate this flow to ensure exceptions are properly caught, logged, and transfo
 
 ## Architecture Limitation Analysis
 
-1. **Missing User Context**: Evaluate the impact of no user association with operations
-2. **Limited Domain Model**: Assess the basic Operation entity and identify needs for related entities like Category
-3. **Incomplete API Surface**: Analyze the missing CRUD operations and their impact
-4. **No Authentication Implementation**: Evaluate the security implications of missing authentication
-5. **Limited Validation**: Assess the impact of basic validation rules only
+1. **Missing Operation Type**: Evaluate the impact of no income/expense distinction in operations
+2. **Expanded Domain Model**: Assess the relationships between User, Category, and Operation entities
+3. **Incomplete API Surface**: Analyze the missing update and delete operations and their impact
+4. **Authentication Implementation**: Evaluate the JWT authentication implementation and security considerations
+5. **Limited Validation**: Assess the impact of missing validation rules for Operation entity
+6. **Configuration Management**: Evaluate the approach of storing sensitive configuration outside of source control
 
 When analyzing the codebase, these limitations should be considered as areas for potential improvement and technical debt.

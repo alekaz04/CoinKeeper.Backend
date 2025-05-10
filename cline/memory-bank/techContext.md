@@ -27,9 +27,9 @@
 - **Docker**: Evaluate container configuration and best practices
 - **Docker Compose**: Assess multi-container orchestration setup
 
-### Authentication (Planned)
-- **JWT**: Analyze planned JSON Web Tokens authentication approach
-- **ASP.NET Core Identity**: Evaluate planned user management implementation
+### Authentication
+- **JWT**: Analyze JSON Web Tokens authentication implementation and token management
+- **Custom User Management**: Evaluate custom user entity and authentication service implementation
 
 ## Development Environment Analysis
 
@@ -44,9 +44,13 @@
 CoinKeeper.Backend/
 ├── src/
 │   ├── CoinKeeper.Backend.Api/        # API host project
-│   ├── CoinKeeper.Operations/         # Operations module
+│   ├── Authentication/
+│   │   ├── CoinKeeper.Authentication/         # Authentication implementation
+│   │   └── CoinKeeper.Authentication.Domain/  # Authentication domain models
+│   ├── CoinKeeper.Finance/            # Finance module (operations, categories)
 │   └── Common/
 │       ├── CoinKeeper.Common/         # Shared utilities
+│       ├── CoinKeeper.Common.Domain/  # Common domain interfaces
 │       └── CoinKeeper.Infrastructure/ # Data access layer
 ├── global.json                        # .NET SDK version
 └── CoinKeeper.Backend.sln             # Solution file
@@ -73,8 +77,10 @@ Evaluate the organization of projects, namespaces, and code files for adherence 
 - Analyze Swagger/OpenAPI documentation completeness
 
 ### Authentication
-- Evaluate configured but not implemented middleware
-- Assess planned JWT-based authentication approach
+- Evaluate JWT-based authentication implementation
+- Assess token generation and validation approach
+- Analyze user management and authentication services
+- Evaluate CurrentUserService implementation for user context
 
 ### Deployment
 - Analyze Docker-based deployment configuration
