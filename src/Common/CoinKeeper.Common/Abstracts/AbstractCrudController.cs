@@ -31,4 +31,10 @@ public class AbstractCrudController<TEntity, TReadDto, TCreateDto> : CommonApiCo
     {
         return await _handler.GetAllForUser(cancellationToken);
     }
+
+    [HttpDelete("{id:guid}")]
+    public async Task Delete(Guid id, CancellationToken cancellationToken)
+    {
+        await _handler.Delete(id, cancellationToken);
+    }
 }

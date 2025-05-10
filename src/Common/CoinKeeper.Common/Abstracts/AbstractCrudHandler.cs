@@ -43,7 +43,7 @@ public abstract class AbstractCrudHandler<TEntity, TReadDto, TCreateDto>
     {
         var entityDto = await _context.Set<TEntity>()
             .AsNoTracking()
-            .Where(x => x.Id == id)
+            .Where(x => x.Id == id && !x.IsDeleted)
             .ProjectTo<TReadDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(token);
 
@@ -61,9 +61,25 @@ public abstract class AbstractCrudHandler<TEntity, TReadDto, TCreateDto>
 
         var entityDtos = await _context.Set<TEntity>()
             .AsNoTracking()
-            .Where(x => x.UserId == currentUserId)
+            .Where(x => x.UserId == currentUserId && !x.IsDeleted)
             .ProjectTo<TReadDto>(_mapper.ConfigurationProvider)
             .ToListAsync(token);
         return entityDtos;
+    }
+
+    public virtual async Task Delete(Guid id, CancellationToken token)
+    {
+        var currentUserId = _currentUser.GetCurrentUserId();
+        var entity = await _context.Set<TEntity>()
+            .Where(x => x.Id == id && x.UserId == currentUserId && !x.IsDeleted)
+            .FirstOrDefaultAsync(token);
+
+        if (entity is null)
+        {
+            throw new CommonErrorException("Entity not found");
+        }
+        entity.IsDeleted = true;
+
+        await _context.SaveChangesAsync(token);
     }
 }

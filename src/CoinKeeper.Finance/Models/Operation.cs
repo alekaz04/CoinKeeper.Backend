@@ -9,6 +9,7 @@ public class Operation : IBaseEntity, IUserSpecifiedEntity, IOperation
     public DateTimeOffset OperationTime { get; set; }
     public decimal Amount { get; set; }
     public string Description { get; set; } = string.Empty;
+    public OperationType OperationType { get; set; }
 
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
