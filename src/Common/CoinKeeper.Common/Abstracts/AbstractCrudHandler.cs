@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoinKeeper.Common;
 
-public abstract class AbstractCrudHandler<TEntity, TReadDto, TCreateDto>
+public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto>
     where TEntity : class, IBaseEntity, IUserSpecifiedEntity
 {
     private readonly DataContext _context;
@@ -39,12 +39,12 @@ public abstract class AbstractCrudHandler<TEntity, TReadDto, TCreateDto>
         return contextEntity.Id;
     }
 
-    public virtual async Task<TReadDto> GetById(Guid id, CancellationToken token)
+    public virtual async Task<TEntityDto> GetById(Guid id, CancellationToken token)
     {
         var entityDto = await _context.Set<TEntity>()
             .AsNoTracking()
             .Where(x => x.Id == id && !x.IsDeleted)
-            .ProjectTo<TReadDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<TEntityDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(token);
 
         if (entityDto is null)
@@ -55,16 +55,28 @@ public abstract class AbstractCrudHandler<TEntity, TReadDto, TCreateDto>
         return entityDto;
     }
 
-    public virtual async Task<IEnumerable<TReadDto>> GetAllForUser(CancellationToken token)
+    public virtual async Task<IEnumerable<TEntityDto>> GetAllForUser(CancellationToken token)
     {
         var currentUserId = _currentUser.GetCurrentUserId();
 
         var entityDtos = await _context.Set<TEntity>()
             .AsNoTracking()
             .Where(x => x.UserId == currentUserId && !x.IsDeleted)
-            .ProjectTo<TReadDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<TEntityDto>(_mapper.ConfigurationProvider)
             .ToListAsync(token);
         return entityDtos;
+    }
+
+    public virtual async Task Update(Guid id, TEntityDto entityDto, CancellationToken token)
+    {
+        var currentUserId = _currentUser.GetCurrentUserId();
+
+        var entity = await _context.Set<TEntity>()
+            .Where(x => x.UserId == currentUserId && !x.IsDeleted && x.Id == id)
+            .FirstOrDefaultAsync(token);
+
+        _mapper.Map(entityDto, entity);
+        await _context.SaveChangesAsync(token);
     }
 
     public virtual async Task Delete(Guid id, CancellationToken token)

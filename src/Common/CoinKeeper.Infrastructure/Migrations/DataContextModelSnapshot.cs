@@ -125,6 +125,9 @@ namespace CoinKeeper.Infrastructure.Migrations
                     b.Property<DateTimeOffset>("OperationTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("OperationType")
+                        .HasColumnType("integer");
+
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 

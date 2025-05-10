@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CoinKeeper.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250510004613_Initial")]
+    [Migration("20250510150248_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -127,6 +127,9 @@ namespace CoinKeeper.Infrastructure.Migrations
 
                     b.Property<DateTimeOffset>("OperationTime")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("OperationType")
+                        .HasColumnType("integer");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");

@@ -1,4 +1,3 @@
-﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -60,6 +59,7 @@ namespace CoinKeeper.Infrastructure.Migrations
                     OperationTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
+                    OperationType = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -85,8 +85,8 @@ namespace CoinKeeper.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "Id", "CreatedAt", "IsDeleted", "LastActivityTime", "Login", "PasswordHash", "PasswordSalt", "RefreshToken", "UpdatedAt" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), false, new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "dev", "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=", "HPdneFiNa8P3C92uUdWLGA==", null, new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) });
+                columns: ["Id", "CreatedAt", "IsDeleted", "LastActivityTime", "Login", "PasswordHash", "PasswordSalt", "RefreshToken", "UpdatedAt"],
+                values: [new Guid("00000000-0000-0000-0000-000000000001"), new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), false, new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "dev", "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=", "HPdneFiNa8P3C92uUdWLGA==", null, new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))]);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Category_UserId",

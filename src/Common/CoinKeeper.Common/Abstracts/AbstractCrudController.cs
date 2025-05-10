@@ -1,15 +1,15 @@
-﻿using CoinKeeper.Authentication.Domain;
+using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Common.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoinKeeper.Common;
 
-public class AbstractCrudController<TEntity, TReadDto, TCreateDto> : CommonApiController
+public class AbstractCrudController<TEntity, TEntityDto, TCreateDto> : CommonApiController
     where TEntity : class, IBaseEntity, IUserSpecifiedEntity
 {
-    private readonly AbstractCrudHandler<TEntity, TReadDto, TCreateDto> _handler;
+    private readonly AbstractCrudHandler<TEntity, TEntityDto, TCreateDto> _handler;
 
-    public AbstractCrudController(AbstractCrudHandler<TEntity, TReadDto, TCreateDto> handler)
+    public AbstractCrudController(AbstractCrudHandler<TEntity, TEntityDto, TCreateDto> handler)
     {
         _handler = handler;
     }
@@ -21,13 +21,13 @@ public class AbstractCrudController<TEntity, TReadDto, TCreateDto> : CommonApiCo
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<TReadDto> GetById(Guid id, CancellationToken cancellationToken)
+    public async Task<TEntityDto> GetById(Guid id, CancellationToken cancellationToken)
     {
         return await _handler.GetById(id, cancellationToken);
     }
 
     [HttpGet]
-    public async Task<IEnumerable<TReadDto>> GetAll(CancellationToken cancellationToken)
+    public async Task<IEnumerable<TEntityDto>> GetAll(CancellationToken cancellationToken)
     {
         return await _handler.GetAllForUser(cancellationToken);
     }
@@ -36,5 +36,11 @@ public class AbstractCrudController<TEntity, TReadDto, TCreateDto> : CommonApiCo
     public async Task Delete(Guid id, CancellationToken cancellationToken)
     {
         await _handler.Delete(id, cancellationToken);
+    }
+
+    [HttpPost("{id:guid}")]
+    public async Task Update(Guid id, TEntityDto entityDto, CancellationToken cancellationToken)
+    {
+        await _handler.Update(id, entityDto, cancellationToken);
     }
 }
