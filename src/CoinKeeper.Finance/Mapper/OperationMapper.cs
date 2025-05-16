@@ -1,4 +1,5 @@
 using AutoMapper;
+using CoinKeeper.Common;
 
 namespace CoinKeeper.Finance;
 

@@ -7,22 +7,25 @@ using System.Text.Json;
 
 namespace CoinKeeper.Common;
 
-public class ErrorMiddleware
+/// <summary>
+/// Миддлвар для отлова ошибок
+/// </summary>
+public class ErrorMiddleware : IMiddleware
 {
-    private readonly RequestDelegate _next;
+    /// <inheritdoc cref="ILogger{T}"/>
     private readonly ILogger<ErrorMiddleware> _logger;
 
-    public ErrorMiddleware(RequestDelegate next, ILogger<ErrorMiddleware> logger)
+    public ErrorMiddleware(ILogger<ErrorMiddleware> logger)
     {
-        _next = next;
         _logger = logger;
     }
 
-    public async Task Invoke(HttpContext context)
+    /// <inheritdoc />
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try
         {
-            await _next.Invoke(context);
+            await next.Invoke(context);
         }
         catch (CommonErrorException e)
         {
@@ -41,6 +44,9 @@ public class ErrorMiddleware
         }
     }
 
+    /// <summary>
+    /// Запокавать ошибку в ответ
+    /// </summary>
     private static Task HandleException(HttpContext context, string message, int statusCode)
     {
         var errorResponse = new ErrorResponse
@@ -56,5 +62,4 @@ public class ErrorMiddleware
 
         return context.Response.WriteAsync(json);
     }
-
 }

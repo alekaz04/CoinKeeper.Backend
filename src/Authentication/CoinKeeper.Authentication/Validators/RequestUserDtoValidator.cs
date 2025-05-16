@@ -3,6 +3,9 @@ using FluentValidation;
 
 namespace CoinKeeper.Authentication.Validators;
 
+/// <summary>
+/// Валидатор логина и пароля пользователя
+/// </summary>
 public class RequestUserDtoValidator : AbstractValidator<RequestUserDto>
 {
     public RequestUserDtoValidator()

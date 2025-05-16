@@ -1,7 +1,11 @@
 using AutoMapper;
+using CoinKeeper.Common;
 
 namespace CoinKeeper.Finance;
 
+/// <summary>
+/// Профиль маппера для сущности <see cref="Category"/>
+/// </summary>
 public class CategoryMapper : Profile
 {
     public CategoryMapper()

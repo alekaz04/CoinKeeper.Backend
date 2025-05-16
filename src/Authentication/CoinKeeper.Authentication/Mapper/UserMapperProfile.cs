@@ -3,6 +3,9 @@ using CoinKeeper.Authentication.Domain;
 
 namespace CoinKeeper.Authentication.Mapper;
 
+/// <summary>
+/// Маппинги сущности <see cref="User"/>
+/// </summary>
 public class UserMapperProfile : Profile
 {
     public UserMapperProfile()

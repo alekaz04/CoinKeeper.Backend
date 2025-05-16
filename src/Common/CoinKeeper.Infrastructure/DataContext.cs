@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoinKeeper.Infrastructure;
 
+/// <summary>
+/// Контекст доступа к базе данных
+/// </summary>
 public class DataContext : DbContext
 {
     public DataContext(DbContextOptions<DataContext> options) : base(options)
@@ -9,6 +12,7 @@ public class DataContext : DbContext
 
     }
 
+    /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -26,6 +30,5 @@ public class DataContext : DbContext
             dynamic configurationInstance = Activator.CreateInstance(type);
             modelBuilder.ApplyConfiguration(configurationInstance);
         }
-
     }
 }

@@ -12,8 +12,14 @@ using System.Text;
 
 namespace CoinKeeper.Extensions.DependencyInjection;
 
+/// <summary>
+/// Класс расширения для модуля авторищации
+/// </summary>
 public static class AuthServiceCollectionExtensions
 {
+    /// <summary>
+    /// Добавить авторизацию и аутентификацию по JWT
+    /// </summary>
     public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));

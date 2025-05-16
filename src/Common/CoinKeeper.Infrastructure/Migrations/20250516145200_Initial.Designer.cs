@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CoinKeeper.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250510150248_Initial")]
+    [Migration("20250516145200_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -36,9 +36,6 @@ namespace CoinKeeper.Infrastructure.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
-
-                    b.Property<DateTimeOffset>("LastActivityTime")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Login")
                         .IsRequired()
@@ -66,7 +63,6 @@ namespace CoinKeeper.Infrastructure.Migrations
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            LastActivityTime = new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Login = "dev",
                             PasswordHash = "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=",
                             PasswordSalt = "HPdneFiNa8P3C92uUdWLGA==",

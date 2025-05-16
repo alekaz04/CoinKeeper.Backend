@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoinKeeper.Backend.Api;
 
+/// <summary>
+/// Конфигурация сервера
+/// </summary>
 public class Startup
 {
     /// <inheritdoc cref="IConfiguration"/>

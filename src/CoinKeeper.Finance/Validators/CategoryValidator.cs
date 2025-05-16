@@ -2,6 +2,9 @@ using FluentValidation;
 
 namespace CoinKeeper.Finance;
 
+/// <summary>
+/// Валидатор создания категории
+/// </summary>
 public class CategoryValidator : AbstractValidator<CategoryCreateDto>
 {
     public CategoryValidator()

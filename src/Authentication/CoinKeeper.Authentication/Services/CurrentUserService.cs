@@ -5,8 +5,10 @@ using System.Security.Claims;
 
 namespace CoinKeeper.Authentication;
 
+/// <inheritdoc />
 public class CurrentUserService : ICurrentUser
 {
+    /// <inheritdoc cref="IHttpContextAccessor"/>
     private readonly IHttpContextAccessor _httpContextAccessor;
 
     public CurrentUserService(IHttpContextAccessor httpContextAccessor)
@@ -14,6 +16,7 @@ public class CurrentUserService : ICurrentUser
         _httpContextAccessor = httpContextAccessor;
     }
 
+    /// <inheritdoc />
     public Guid GetCurrentUserId()
     {
         if (_httpContextAccessor.HttpContext is null)

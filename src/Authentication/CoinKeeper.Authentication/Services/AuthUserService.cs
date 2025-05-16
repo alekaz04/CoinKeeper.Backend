@@ -1,33 +1,41 @@
 using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Common;
 using CoinKeeper.Infrastructure;
-using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoinKeeper.Authentication;
 
+/// <summary>
+/// Сервис аутентификации пользователя
+/// </summary>
 public class AuthUserService
 {
-    private readonly IValidator<RequestUserDto> _validator;
+    /// <inheritdoc cref="PasswordHashService"/>
     private readonly PasswordHashService _passwordHashService;
+
+    /// <inheritdoc cref="DataContext"/>
     private readonly DataContext _context;
+
+    /// <inheritdoc cref="JsonWebTokenService"/>
     private readonly JsonWebTokenService _jwtService;
 
-    public AuthUserService(IValidator<RequestUserDto> validator,
-        PasswordHashService passwordHashService,
+    public AuthUserService(PasswordHashService passwordHashService,
         DataContext context,
         JsonWebTokenService jwtService)
     {
-        _validator = validator;
         _passwordHashService = passwordHashService;
         _context = context;
         _jwtService = jwtService;
     }
 
+    /// <summary>
+    /// Аутентифицировать пользователя по логину и паролю
+    /// </summary>
+    /// <param name="userDto">Логин и пароль пользователя</param>
+    /// <param name="token"></param>
+    /// <returns>Информацию о пользователя + Пара Access и Refresh токен</returns>
     public async Task<UserResponseDto> Authenticate(RequestUserDto userDto, CancellationToken token)
     {
-        _validator.ValidateAndThrow(userDto);
-
         var user = await _context.Set<User>()
             .FirstOrDefaultAsync(x => x.Login == userDto.Login, token);
 
@@ -58,6 +66,13 @@ public class AuthUserService
         return userResponseDto;
     }
 
+    /// <summary>
+    /// Создать новый Access токен для пользователя по Refresh токену
+    /// </summary>
+    /// <param name="refreshToken">Refresh токен</param>
+    /// <param name="token">Токен отмены запроса</param>
+    /// <returns></returns>
+    /// <exception cref="CommonErrorException"></exception>
     public async Task<AuthToken> RefreshToken(string refreshToken, CancellationToken token)
     {
         var user = await _context.Set<User>()

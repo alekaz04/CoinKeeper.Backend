@@ -5,8 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoinKeeper.Authentication;
 
+/// <summary>
+/// Пользователи
+/// </summary>
 public class UserController : CommonApiController
 {
+    /// <inheritdoc cref="UserService"/>
     private readonly UserService _service;
 
     public UserController(UserService service)
@@ -14,6 +18,12 @@ public class UserController : CommonApiController
         _service = service;
     }
 
+    /// <summary>
+    /// Создать пользователя
+    /// </summary>
+    /// <param name="userDto">Запрос на создания пользователя</param>
+    /// <param name="token">Токен отмены запроса</param>
+    /// <returns>Идентфикатор созданного пользователя</returns>
     [HttpPost]
     [AllowAnonymous]
     public async Task<Guid> CreateUser([FromBody] RequestUserDto userDto, CancellationToken token)

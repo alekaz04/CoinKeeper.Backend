@@ -6,8 +6,14 @@ using Serilog;
 
 namespace CoinKeeper.Extensions.DependencyInjection;
 
+/// <summary>
+/// Класс расширения для <see cref="IServiceCollection"/>
+/// </summary>
 public static class CommonServiceCollectionExtensions
 {
+    /// <summary>
+    /// Добавить основные сервисы
+    /// </summary>
     public static IServiceCollection AddCommon(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddLogging(configuration)
@@ -15,6 +21,9 @@ public static class CommonServiceCollectionExtensions
         return services;
     }
 
+    /// <summary>
+    /// Добавить логгирование
+    /// </summary>
     private static IServiceCollection AddLogging(this IServiceCollection services, IConfiguration configuration)
     {
         var log = Log.Logger = new LoggerConfiguration()
@@ -27,6 +36,9 @@ public static class CommonServiceCollectionExtensions
         return services;
     }
 
+    /// <summary>
+    /// Добавить сваггер с аутентификацией
+    /// </summary>
     private static IServiceCollection AddSwaggerWithAuth(this IServiceCollection services)
     {
         services.AddOpenApiDocument(options =>

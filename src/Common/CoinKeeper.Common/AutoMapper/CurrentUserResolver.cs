@@ -1,7 +1,7 @@
 using AutoMapper;
 using CoinKeeper.Authentication.Domain;
 
-namespace CoinKeeper.Finance;
+namespace CoinKeeper.Common;
 
 public class CurrentUserResolver : IValueResolver<object, object, Guid>
 {

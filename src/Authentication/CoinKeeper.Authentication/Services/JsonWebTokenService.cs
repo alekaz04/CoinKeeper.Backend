@@ -7,8 +7,12 @@ using System.Text;
 
 namespace CoinKeeper.Authentication;
 
+/// <summary>
+/// Сервис для работы с JWT
+/// </summary>
 public class JsonWebTokenService
 {
+    /// <inheritdoc cref="JwtOptions"/>
     private readonly JwtOptions _jwtOptions;
 
     public JsonWebTokenService(JwtOptions jwtOptions)
@@ -16,6 +20,10 @@ public class JsonWebTokenService
         _jwtOptions = jwtOptions;
     }
 
+    /// <summary>
+    /// Получить новую пару Access и Refresh токенов
+    /// </summary>
+    /// <param name="userId">Идентификатор пользователя</param>
     public async Task<AuthToken> GenerateToken(Guid userId)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.SecurityKey));
@@ -43,6 +51,9 @@ public class JsonWebTokenService
         };
     }
 
+    /// <summary>
+    /// Сгенерировать Refresh токен
+    /// </summary>
     private string GenerateRefreshToken()
     {
         byte[] randomNumber = new byte[64];

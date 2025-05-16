@@ -8,12 +8,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoinKeeper.Common;
 
+/// <summary>
+/// Базовый круд хэжндлер
+/// </summary>
+/// <typeparam name="TEntity">Исходная сущность</typeparam>
+/// <typeparam name="TEntityDto">Дто сущности</typeparam>
+/// <typeparam name="TCreateDto">Дто создания сущности</typeparam>
 public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto>
     where TEntity : class, IBaseEntity, IUserSpecifiedEntity
 {
+    /// <inheritdoc cref="DataContext"/>
     private readonly DataContext _context;
+
+    /// <inheritdoc cref="IMapper"/>
     private readonly IMapper _mapper;
+
+    /// <inheritdoc cref="IValidator{T}"/>
     private readonly IValidator<TCreateDto> _validator;
+
+    /// <inheritdoc cref="ICurrentUser"/>
     private readonly ICurrentUser _currentUser;
 
     protected AbstractCrudHandler(DataContext context,
@@ -27,18 +40,30 @@ public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto>
         _currentUser = currentUser;
     }
 
-    public virtual async Task<Guid> Create(TCreateDto entity, CancellationToken token)
+    /// <summary>
+    /// Создать <see cref="TEntity"/>
+    /// </summary>
+    /// <param name="createDto">Дто создания <see cref="TEntity"/></param>
+    /// <param name="token">Токен отмены запроса</param>
+    /// <returns>Идентификатор созданной сущности</returns>
+    public virtual async Task<Guid> Create(TCreateDto createDto, CancellationToken token)
     {
-        _validator.ValidateAndThrow(entity);
+        _validator.ValidateAndThrow(createDto);
 
-        var contextEntity = _mapper.Map<TEntity>(entity);
+        var enitity = _mapper.Map<TEntity>(createDto);
 
-        await _context.AddAsync(contextEntity, token);
+        await _context.AddAsync(enitity, token);
         await _context.SaveChangesAsync(token);
 
-        return contextEntity.Id;
+        return enitity.Id;
     }
 
+    /// <summary>
+    /// Получить <see cref="TEntityDto"/> по идентификатору
+    /// </summary>
+    /// <param name="id">Идентфиикатор</param>
+    /// <param name="token">Токен отмены запроса</param>
+    /// <returns>Дто сущности <see cref="TEntityDto"/></returns>
     public virtual async Task<TEntityDto> GetById(Guid id, CancellationToken token)
     {
         var entityDto = await _context.Set<TEntity>()
@@ -55,6 +80,10 @@ public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto>
         return entityDto;
     }
 
+    /// <summary>
+    /// Получить все сущности данного пользователя
+    /// </summary>
+    /// <param name="token">Токен отмены запроса</param>
     public virtual async Task<IEnumerable<TEntityDto>> GetAllForUser(CancellationToken token)
     {
         var currentUserId = _currentUser.GetCurrentUserId();
@@ -64,9 +93,16 @@ public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto>
             .Where(x => x.UserId == currentUserId && !x.IsDeleted)
             .ProjectTo<TEntityDto>(_mapper.ConfigurationProvider)
             .ToListAsync(token);
+
         return entityDtos;
     }
 
+    /// <summary>
+    /// Обновить сущность
+    /// </summary>
+    /// <param name="id">Идентификатор сущности</param>
+    /// <param name="entityDto">Дто сущности</param>
+    /// <param name="token">Токен отмены запроса</param>
     public virtual async Task Update(Guid id, TEntityDto entityDto, CancellationToken token)
     {
         var currentUserId = _currentUser.GetCurrentUserId();
@@ -88,8 +124,9 @@ public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto>
 
         if (entity is null)
         {
-            throw new CommonErrorException("Entity not found");
+            throw new CommonErrorException($"Сущность {typeof(TEntity).Name} с идентификатором {id} не найдена");
         }
+
         entity.IsDeleted = true;
 
         await _context.SaveChangesAsync(token);

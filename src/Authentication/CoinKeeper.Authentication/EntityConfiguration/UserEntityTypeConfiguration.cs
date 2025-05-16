@@ -4,8 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoinKeeper.Authentication;
 
+/// <summary>
+/// Конфигурация сущности <see cref="User"/> для ef core
+/// </summary>
 public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 {
+    /// <inheritdoc />
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(x => x.Id);
@@ -17,7 +21,6 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
                 Login = "dev",
                 PasswordHash = "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=",
                 PasswordSalt = "HPdneFiNa8P3C92uUdWLGA==",
-                LastActivityTime = new DateTimeOffset(2025, 1, 1, 1, 1, 1, TimeSpan.Zero),
                 CreatedAt = new DateTimeOffset(2025, 1, 1, 1, 1, 1, TimeSpan.Zero),
                 UpdatedAt = new DateTimeOffset(2025, 1, 1, 1, 1, 1, TimeSpan.Zero),
                 IsDeleted = false

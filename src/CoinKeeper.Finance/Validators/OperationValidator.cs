@@ -2,6 +2,9 @@ using FluentValidation;
 
 namespace CoinKeeper.Finance;
 
+/// <summary>
+/// Валидатор создания операции
+/// </summary>
 public class OperationValidator : AbstractValidator<OperationCreateDto>
 {
     public OperationValidator()
