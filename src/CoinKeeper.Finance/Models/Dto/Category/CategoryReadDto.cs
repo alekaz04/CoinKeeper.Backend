@@ -11,5 +11,5 @@ public class CategoryReadDto : ICategory
     public Guid Id { get; set; }
 
     /// <inheritdoc />
-    public string? CategoryName { get; set; }
+    public string CategoryName { get; set; } = null!;
 }

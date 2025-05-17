@@ -28,5 +28,5 @@ public class OperationReadDto : IOperation
     /// <summary>
     /// Категория операции
     /// </summary>
-    public CategoryReadDto Category { get; set; }
+    public CategoryReadDto? Category { get; set; }
 }

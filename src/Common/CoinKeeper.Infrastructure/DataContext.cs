@@ -17,7 +17,7 @@ public class DataContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         var configurationTypes = AppDomain.CurrentDomain.GetAssemblies()
-            .Where(a => a.FullName.StartsWith("CoinKeeper"))
+            .Where(a => a.FullName != null && a.FullName.StartsWith("CoinKeeper"))
             .SelectMany(a => a.GetTypes())
             .Where(t => t.IsClass && !t.IsAbstract)
             .SelectMany(t => t.GetInterfaces(), (t, i) => new { Type = t, Interface = i })
@@ -27,7 +27,7 @@ public class DataContext : DbContext
 
         foreach (var type in configurationTypes)
         {
-            dynamic configurationInstance = Activator.CreateInstance(type);
+            dynamic? configurationInstance = Activator.CreateInstance(type);
             modelBuilder.ApplyConfiguration(configurationInstance);
         }
     }

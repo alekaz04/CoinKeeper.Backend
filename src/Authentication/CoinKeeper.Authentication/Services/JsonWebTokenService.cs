@@ -24,7 +24,7 @@ public class JsonWebTokenService
     /// Получить новую пару Access и Refresh токенов
     /// </summary>
     /// <param name="userId">Идентификатор пользователя</param>
-    public async Task<AuthToken> GenerateToken(Guid userId)
+    public AuthToken GenerateToken(Guid userId)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.SecurityKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);

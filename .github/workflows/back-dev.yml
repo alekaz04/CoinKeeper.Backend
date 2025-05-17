@@ -23,7 +23,7 @@ jobs:
         run: dotnet restore ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj
 
       - name: Build project
-        run: dotnet build ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj --no-restore
+        run: dotnet build ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj --no-restore -warnaserror
 
       - name: Install dotnet-ef tool
         run: dotnet tool install --global dotnet-ef

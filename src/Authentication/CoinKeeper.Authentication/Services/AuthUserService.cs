@@ -51,7 +51,7 @@ public class AuthUserService
             throw new CommonErrorException("Неверный логин или пароль.");
         }
 
-        var jwt = await _jwtService.GenerateToken(user.Id);
+        var jwt = _jwtService.GenerateToken(user.Id);
 
         user.RefreshToken = jwt.RefreshToken;
         await _context.SaveChangesAsync(token);
@@ -83,7 +83,7 @@ public class AuthUserService
             throw new CommonErrorException("Невалидный токен обновления");
         }
 
-        var jwt = await _jwtService.GenerateToken(user.Id);
+        var jwt = _jwtService.GenerateToken(user.Id);
 
         user.RefreshToken = jwt.RefreshToken;
 

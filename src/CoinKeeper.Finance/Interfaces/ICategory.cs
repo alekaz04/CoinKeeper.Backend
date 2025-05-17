@@ -1,7 +1,7 @@
 namespace CoinKeeper.Finance;
 
 /// <summary>
-/// Базавый интерфейс категории
+/// Базовый интерфейс категории
 /// </summary>
 public interface ICategory
 {

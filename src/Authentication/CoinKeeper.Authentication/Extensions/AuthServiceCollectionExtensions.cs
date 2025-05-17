@@ -65,7 +65,7 @@ public static class AuthServiceCollectionExtensions
                 {
                     if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
                     {
-                        context.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
+                        context.Response.Headers.TryAdd("IS-TOKEN-EXPIRED", "true");
                     }
 
                     return Task.CompletedTask;

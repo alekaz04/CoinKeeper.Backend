@@ -32,17 +32,17 @@ public class ErrorMiddleware
         }
         catch (CommonErrorException e)
         {
-            _logger.LogError(e, e.Message);
+            _logger.LogError(e, "Handled CommonErrorException: {Message}",e.Message);
             await HandleException(context, e.Message, 400);
         }
         catch (ValidationException e)
         {
-            _logger.LogError(e, e.Message);
+            _logger.LogError(e, "Handled ValidationException: {Message}", e.Message);
             await HandleException(context, e.Message, 400);
         }
         catch (Exception e)
         {
-            _logger.LogError(e, e.Message);
+            _logger.LogError(e,"Handled Exception: {Message}" ,e.Message);
             await HandleException(context, "Internal Server Error", 500);
         }
     }
