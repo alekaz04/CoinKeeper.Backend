@@ -1,5 +1,7 @@
 # CoinKeeper
+[![CoinKeeper dev](https://github.com/alekaz04/CoinKeeper.Backend/actions/workflows/back-dev.yml/badge.svg)](https://github.com/alekaz04/CoinKeeper.Backend/actions/workflows/back-dev.yml)
 
+Репозиторий инфраструктуры: [тык](https://github.com/alekaz04/CoinKeeper.Infrastructure)
 ## Описание проекта
 
 CoinKeeper — это бэкенд-сервис для управления личными финансами, предоставляющий REST API. Проект разрабатывается в образовательных целях для изучения проектирования программного обеспечения, разработки бэкенда и развертывания с использованием современных технологий.
@@ -18,70 +20,6 @@ CoinKeeper — это бэкенд-сервис для управления ли
 - **Документация API:** Swagger/OpenAPI (NSwag)
 - **Логирование:** Serilog (настроено, но не полностью реализовано)
 - **Контейнеризация:** Docker
-
-## Архитектура
-
-Проект следует многослойной архитектуре с четким разделением ответственности:
-
-```
-┌─────────────────────────────────────────────────────┐
-│                  API Layer                          │
-│  (Controllers, API Endpoints, Request/Response)     │
-└───────────────────┬─────────────────────────────────┘
-                    │
-┌───────────────────▼─────────────────────────────────┐
-│                Business Logic Layer                 │
-│  (Handlers, Services, Validation, Business Rules)   │
-└───────────────────┬─────────────────────────────────┘
-                    │
-┌───────────────────▼─────────────────────────────────┐
-│                 Data Access Layer                   │
-│  (Entity Framework, Repositories, Data Context)     │
-└───────────────────┬─────────────────────────────────┘
-                    │
-┌───────────────────▼─────────────────────────────────┐
-│                  Database                           │
-│  (PostgreSQL)                                       │
-└─────────────────────────────────────────────────────┘
-```
-
-### Структура проекта
-
-```
-CoinKeeper.Backend/
-├── src/
-│   ├── CoinKeeper.Backend.Api/        # API host project
-│   ├── Authentication/
-│   │   ├── CoinKeeper.Authentication/         # Authentication implementation
-│   │   └── CoinKeeper.Authentication.Domain/  # Authentication domain models
-│   ├── CoinKeeper.Finance/            # Finance module (operations, categories)
-│   └── Common/
-│       ├── CoinKeeper.Common/         # Shared utilities
-│       ├── CoinKeeper.Common.Domain/  # Common domain interfaces
-│       └── CoinKeeper.Infrastructure/ # Data access layer
-```
-
-### Ключевые компоненты
-
-1. **API Layer**
-   - Контроллеры для обработки HTTP-запросов
-   - DTO (Data Transfer Objects) для входных и выходных данных
-   - Middleware для обработки ошибок и аутентификации
-
-2. **Business Logic Layer**
-   - Обработчики (Handlers) для реализации бизнес-логики
-   - Валидаторы для проверки входных данных
-   - Сервисы для аутентификации и работы с пользователями
-
-3. **Data Access Layer**
-   - Entity Framework Core для доступа к базе данных
-   - Конфигурации сущностей для определения схемы базы данных
-   - Миграции для управления изменениями схемы
-
-4. **Domain Models**
-   - Сущности: User, Operation, Category
-   - Интерфейсы для определения контрактов
-   - DTO для передачи данных между слоями
 
 ## Текущие возможности
 
@@ -116,42 +54,6 @@ CoinKeeper.Backend/
 - .NET 9 SDK
 - PostgreSQL
 - Docker (опционально)
-
-### Конфигурация
-Для запуска проекта необходимо настроить следующие параметры в `appsettings.json` или через переменные окружения:
-
-1. **Строка подключения к базе данных**:
-```json
-"ConnectionStrings": {
-  "DataContext": "Host=localhost;Database=coinkeeper;Username=postgres;Password=yourpassword"
-}
-```
-
-2. **Настройки JWT**:
-```json
-"JwtOptions": {
-  "Issuer": "CoinKeeper",
-  "Audience": "CoinKeeperClient",
-  "SecurityKey": "your-secure-key-with-at-least-32-characters",
-  "Expiration": "1440"
-}
-```
-
-> **Примечание**: В репозитории эти настройки намеренно оставлены пустыми, так как они должны храниться в переменных окружения или User Secrets для обеспечения безопасности.
-
-### Запуск проекта
-
-#### Локальный запуск
-```bash
-cd src/CoinKeeper.Backend.Api
-dotnet run
-```
-
-#### Запуск в Docker
-```bash
-docker build -t coinkeeper -f src/CoinKeeper.Backend.Api/Dockerfile .
-docker run -p 8080:80 -e "ConnectionStrings__DataContext=Host=host.docker.internal;Database=coinkeeper;Username=postgres;Password=yourpassword" coinkeeper
-```
 
 ## Планы развития
 
