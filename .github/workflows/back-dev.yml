@@ -48,7 +48,7 @@ jobs:
 
       - name: Push migration Docker image
         run: |
-          docker push ghcr.io/${{ github.repository }}/migration-bundle:dev
+          docker push ghcr.io/alekaz04/coinkeeper/migration-bundle:dev
 
       # Сборка и публикация Docker-образа для основного API
       - name: Build backend Docker image
@@ -57,4 +57,4 @@ jobs:
 
       - name: Push backend Docker image
         run: |
-          docker push ghcr.io/${{ github.repository }}/backend:dev
+          docker push ghcr.io/alekaz04/coinkeeper/backend:dev
