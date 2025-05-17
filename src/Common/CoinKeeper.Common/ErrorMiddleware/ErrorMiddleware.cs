@@ -10,22 +10,25 @@ namespace CoinKeeper.Common;
 /// <summary>
 /// Миддлвар для отлова ошибок
 /// </summary>
-public class ErrorMiddleware : IMiddleware
+public class ErrorMiddleware
 {
+    private readonly RequestDelegate _next;
+
     /// <inheritdoc cref="ILogger{T}"/>
     private readonly ILogger<ErrorMiddleware> _logger;
 
-    public ErrorMiddleware(ILogger<ErrorMiddleware> logger)
+    public ErrorMiddleware(RequestDelegate next, ILogger<ErrorMiddleware> logger)
     {
+        _next = next;
         _logger = logger;
     }
 
     /// <inheritdoc />
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    public async Task Invoke(HttpContext context)
     {
         try
         {
-            await next.Invoke(context);
+            await _next.Invoke(context);
         }
         catch (CommonErrorException e)
         {

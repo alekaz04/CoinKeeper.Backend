@@ -1,4 +1,3 @@
-﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -85,8 +84,8 @@ namespace CoinKeeper.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "Id", "CreatedAt", "IsDeleted", "Login", "PasswordHash", "PasswordSalt", "RefreshToken", "UpdatedAt" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), false, "dev", "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=", "HPdneFiNa8P3C92uUdWLGA==", null, new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) });
+                columns: ["Id", "CreatedAt", "IsDeleted", "Login", "PasswordHash", "PasswordSalt", "RefreshToken", "UpdatedAt"],
+                values: [new Guid("00000000-0000-0000-0000-000000000001"), new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), false, "dev", "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=", "HPdneFiNa8P3C92uUdWLGA==", null, new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))]);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Category_UserId",

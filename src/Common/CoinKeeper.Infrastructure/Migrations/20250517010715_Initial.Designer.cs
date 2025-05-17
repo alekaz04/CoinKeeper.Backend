@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CoinKeeper.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250516145200_Initial")]
+    [Migration("20250517010715_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
