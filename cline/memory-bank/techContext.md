@@ -31,6 +31,45 @@
 - **JWT**: Analyze JSON Web Tokens authentication implementation and token management
 - **Custom User Management**: Evaluate custom user entity and authentication service implementation
 
+## CI/CD и автоматизация
+
+### GitHub Actions
+- **Два основных workflow**:
+  1. **Workflow для разработки (dev)**: 
+     - Триггеры: push и pull request в ветку dev
+     - Публикация Docker-образов с тегом `dev`
+  2. **Workflow для релизов**:
+     - Триггеры: создание тегов в формате `v*.*.*`
+     - Публикация Docker-образов с тегом, соответствующим версии релиза
+
+- **Основные шаги в обоих workflow**:
+  - Сборка проекта с .NET 9
+  - Проверка наличия ожидающих миграций EF Core
+  - Публикация Docker-образов в GitHub Container Registry (ghcr.io):
+    - Образ для миграций: `ghcr.io/alekaz04/coinkeeper/migration-bundle:[tag]`
+    - Образ для API: `ghcr.io/alekaz04/coinkeeper/backend:[tag]`
+
+- **Особенности**:
+  - Использование GitHub Container Registry вместо Docker Hub
+  - Автоматическая проверка миграций для предотвращения проблем с базой данных
+  - Сборка с флагом `-warnaserror` для обеспечения качества кода
+
+### Docker Compose (в репозитории CoinKeeper.Infrastructure)
+- **Сервисы**:
+  - **backend**: Основной API-сервис (использует образ из GitHub Container Registry)
+  - **postgres**: База данных PostgreSQL 16.3
+  - **db-migrations**: Сервис для выполнения миграций (использует образ из GitHub Container Registry)
+  - **dozzle**: Инструмент для просмотра логов контейнеров
+  - **portainer-ce**: Инструмент для управления контейнерами
+
+- **Сетевая конфигурация**:
+  - Выделенная подсеть 172.27.1.0/24
+  - Мост-сеть для коммуникации между сервисами
+
+- **Тома**:
+  - portainer: Для хранения данных Portainer
+  - pgresdata: Для хранения данных PostgreSQL (закомментировано в текущей версии)
+
 ## Development Environment Analysis
 
 ### Required Tools Analysis
@@ -56,6 +95,15 @@ CoinKeeper.Backend/
 └── CoinKeeper.Backend.sln             # Solution file
 ```
 
+### Infrastructure Repository Structure
+```
+CoinKeeper.Infrastructure/
+├── docker-compose.yml                 # Основной файл docker-compose
+├── env/                               # Директория с env-файлами
+│   ├── backend.env                    # Переменные окружения для API и миграций
+│   └── postgres.env                   # Переменные окружения для PostgreSQL
+```
+
 Evaluate the organization of projects, namespaces, and code files for adherence to separation of concerns and modularity principles.
 
 ### Configuration Analysis
@@ -63,6 +111,23 @@ Evaluate the organization of projects, namespaces, and code files for adherence 
 - **appsettings.Development.json**: Assess development-specific settings approach
 - **Dockerfile**: Analyze container configuration best practices
 - **.dockerignore**: Evaluate exclusion patterns for Docker context
+- **env-файлы**: Анализ переменных окружения для контейнеров
+
+## Конфигурация и секреты
+
+### Подход к конфигурации
+- **Чувствительные данные** намеренно оставлены пустыми в appsettings.json:
+  - Строки подключения к базе данных
+  - Настройки JWT (Issuer, Audience, SecurityKey)
+
+### Хранение секретов
+- **В разработке**: UserSecrets для локальной разработки
+- **В контейнерах**: env-файлы с переменными окружения
+  - backend.env: Содержит строку подключения к PostgreSQL, настройки JWT и Serilog
+  - postgres.env: Содержит учетные данные PostgreSQL
+
+### Секреты в GitHub Actions
+- GT_PAT: Personal Access Token для доступа к GitHub Container Registry
 
 ## Technical Constraint Analysis
 

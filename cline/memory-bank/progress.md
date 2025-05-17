@@ -4,9 +4,9 @@
 
 **Project Stage**: Early Development / Feature Implementation
 
-**Last Updated**: May 10, 2025
+**Last Updated**: May 17, 2025
 
-**Overall Analysis Progress**: ~40% of MVP features analyzed
+**Overall Analysis Progress**: ~45% of MVP features analyzed
 
 **Latest Document**: [CoinKeeper_Tasks_10_05_25.md](../analyse/CoinKeeper_Tasks_10_05_25.md) - Plan of next tasks
 
@@ -50,6 +50,12 @@
    - Docker configuration review
    - Swagger UI for API testing assessment
 
+8. **CI/CD Pipeline**
+   - GitHub Actions workflows for dev and release branches
+   - Docker image building and publishing to GitHub Container Registry
+   - Migration validation in CI pipeline
+   - Docker Compose configuration in separate repository
+
 ## What's Left to Analyze
 
 ### MVP Features Analysis
@@ -84,6 +90,7 @@
 7. **Deployment**
    - [ ] Review Docker Compose setup requirements
    - [ ] Analyze production configuration needs
+   - [ ] Evaluate automated deployment options
 
 ### Future Enhancement Analysis
 
@@ -102,8 +109,25 @@
 5. **Missing Filtering and Pagination**: No support for filtering and pagination in list endpoints
 6. **Documentation**: No XML comments for API documentation
 7. **Empty Configuration**: Connection strings and JWT settings are intentionally empty in appsettings.json
+8. **Manual Deployment**: No automated deployment from CI/CD pipeline to production environment
 
 **Note**: Connection strings and JWT options are intentionally empty in appsettings.json as they are stored in environment variables and user secrets, following security best practices.
+
+## Прогресс в области DevOps
+
+1. **CI/CD**:
+   - [x] Настроен GitHub Actions для автоматической сборки
+   - [x] Настроена публикация Docker-образов в GitHub Container Registry
+   - [x] Добавлена проверка миграций EF Core
+   - [x] Настроены отдельные workflow для dev и release
+   - [ ] Настроено автоматическое развертывание в тестовую среду
+   - [ ] Добавлены автоматические тесты в pipeline
+
+2. **Контейнеризация**:
+   - [x] Созданы Dockerfile для API и миграций
+   - [x] Настроена автоматическая сборка и публикация образов
+   - [x] Создан docker-compose для развертывания в отдельном репозитории
+   - [ ] Настроено автоматическое развертывание docker-compose
 
 ## Analysis of Project Decisions
 
@@ -123,6 +147,12 @@
 - Evaluation of initial non-RESTful route naming (needs refactoring)
 - Assessment of DTOs for input/output separation
 - Review of Swagger/OpenAPI for documentation
+
+### CI/CD Analysis (May 2025)
+- Evaluation of GitHub Actions workflows for dev and release branches
+- Assessment of Docker image building and publishing process
+- Analysis of migration validation in CI pipeline
+- Review of Docker Compose configuration in separate repository
 
 ## Next Development Tasks
 
@@ -160,6 +190,10 @@ Based on the analysis, the following tasks have been identified for implementati
 3. **Implement Balance Calculation**
    - Add endpoint for period-based balance calculation
    - Create DTOs for request and response
+
+4. **Automate Deployment**
+   - Connect GitHub Actions to deployment process
+   - Implement automatic updates of docker-compose
 
 ### Priority 3 Tasks
 

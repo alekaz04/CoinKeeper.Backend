@@ -115,6 +115,46 @@ Exception → ErrorMiddleware → ErrorResponse → Client
 
 Evaluate this flow to ensure exceptions are properly caught, logged, and transformed into appropriate responses.
 
+## Процесс CI/CD
+
+### Процесс разработки
+
+```mermaid
+graph TD
+    A[Разработчик делает Push в ветку dev] --> B[GitHub Actions запускает workflow]
+    B --> C[Сборка проекта]
+    C --> D[Проверка миграций EF Core]
+    D --> E[Сборка Docker-образов]
+    E --> F[Публикация образов в GitHub Container Registry с тегом dev]
+```
+
+### Процесс релиза
+
+```mermaid
+graph TD
+    A[Создание тега v*.*.* в репозитории] --> B[GitHub Actions запускает workflow]
+    B --> C[Сборка проекта]
+    C --> D[Проверка миграций EF Core]
+    D --> E[Сборка Docker-образов]
+    E --> F[Публикация образов в GitHub Container Registry с тегом релиза]
+```
+
+### Процесс развертывания
+
+```mermaid
+graph TD
+    A[Публикация Docker-образов в GitHub Container Registry] --> B[Ручное обновление docker-compose.yml в репозитории CoinKeeper.Infrastructure]
+    B --> C[Запуск docker-compose на сервере]
+    C --> D1[Запуск PostgreSQL]
+    D1 --> E[Запуск сервиса миграций]
+    E --> F[Запуск основного API]
+    C --> D2[Запуск инструментов мониторинга]
+    D2 --> G1[Dozzle для просмотра логов]
+    D2 --> G2[Portainer для управления контейнерами]
+```
+
+Эти процессы обеспечивают автоматическую проверку, сборку и публикацию Docker-образов, а также структурированное развертывание приложения.
+
 ## Architecture Limitation Analysis
 
 1. **Missing Operation Type**: Evaluate the impact of no income/expense distinction in operations
@@ -123,5 +163,6 @@ Evaluate this flow to ensure exceptions are properly caught, logged, and transfo
 4. **Authentication Implementation**: Evaluate the JWT authentication implementation and security considerations
 5. **Limited Validation**: Assess the impact of missing validation rules for Operation entity
 6. **Configuration Management**: Evaluate the approach of storing sensitive configuration outside of source control
+7. **Manual Deployment**: Assess the impact of manual deployment process and potential for automation
 
 When analyzing the codebase, these limitations should be considered as areas for potential improvement and technical debt.
