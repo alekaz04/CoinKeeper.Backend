@@ -31,6 +31,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yml", "yml", "{3FDAA87E-7DD1-4707-8B24-AB4BDD7EE02C}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\back-dev.yml = .github\workflows\back-dev.yml
+		.github\workflows\back-release.yml = .github\workflows\back-release.yml
 	EndProjectSection
 EndProject
 Global

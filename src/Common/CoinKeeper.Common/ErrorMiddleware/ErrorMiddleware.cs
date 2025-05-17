@@ -48,7 +48,7 @@ public class ErrorMiddleware
     }
 
     /// <summary>
-    /// Запокавать ошибку в ответ
+    /// Запаковать ошибку в ответ
     /// </summary>
     private static Task HandleException(HttpContext context, string message, int statusCode)
     {
