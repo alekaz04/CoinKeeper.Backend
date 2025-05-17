@@ -28,6 +28,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Authentication",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Common.Domain", "src\Common\CoinKeeper.Common.Domain\CoinKeeper.Common.Domain.csproj", "{199342BE-360B-453B-8198-0B97E2ED23C6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yml", "yml", "{3FDAA87E-7DD1-4707-8B24-AB4BDD7EE02C}"
+	ProjectSection(SolutionItems) = preProject
+		yml\back-dev.yml = yml\back-dev.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
