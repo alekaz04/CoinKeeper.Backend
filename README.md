@@ -1,6 +1,6 @@
 # CoinKeeper
 [![CoinKeeper dev](https://github.com/alekaz04/CoinKeeper.Backend/actions/workflows/back-dev.yml/badge.svg)](https://github.com/alekaz04/CoinKeeper.Backend/actions/workflows/back-dev.yml)
-
+[![CoinKeeper Release](https://github.com/alekaz04/CoinKeeper.Backend/actions/workflows/back-release.yml/badge.svg)](https://github.com/alekaz04/CoinKeeper.Backend/actions/workflows/back-release.yml)
 Репозиторий инфраструктуры: [тык](https://github.com/alekaz04/CoinKeeper.Infrastructure)
 ## Описание проекта
 
