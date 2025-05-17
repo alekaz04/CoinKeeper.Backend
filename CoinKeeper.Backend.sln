@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Common.Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yml", "yml", "{3FDAA87E-7DD1-4707-8B24-AB4BDD7EE02C}"
 	ProjectSection(SolutionItems) = preProject
-		yml\back-dev.yml = yml\back-dev.yml
+		.github\workflows\back-dev.yml = .github\workflows\back-dev.yml
 	EndProjectSection
 EndProject
 Global
