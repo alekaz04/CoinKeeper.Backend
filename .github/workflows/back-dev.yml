@@ -25,6 +25,12 @@ jobs:
       - name: Build project
         run: dotnet build ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj --no-restore
 
+      - name: Install dotnet-ef tool
+        run: dotnet tool install --global dotnet-ef
+
+      - name: Add dotnet tools to PATH
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
       - name: Check for pending EF Core migrations
         run: dotnet ef migrations has-pending-model-changes --project ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj
 
