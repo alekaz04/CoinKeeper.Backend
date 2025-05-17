@@ -44,7 +44,7 @@ jobs:
       # Сборка и публикация Docker-образа для миграций
       - name: Build migration Docker image
         run: |
-          docker build -f ./src/Common/CoinKeeper.Infrastructure/Dockerfile -t ghcr.io/${{ github.repository }}/migration-bundle:dev .
+          docker build -f ./src/Common/CoinKeeper.Infrastructure/Dockerfile -t ghcr.io/alekaz04/coinkeeper/migration-bundle:dev .
 
       - name: Push migration Docker image
         run: |
@@ -53,7 +53,7 @@ jobs:
       # Сборка и публикация Docker-образа для основного API
       - name: Build backend Docker image
         run: |
-          docker build -f ./src/CoinKeeper.Backend.Api/Dockerfile -t ghcr.io/${{ github.repository }}/backend:dev .
+          docker build -f ./src/CoinKeeper.Backend.Api/Dockerfile -t ghcr.io/alekaz04/coinkeeper/backend:dev .
 
       - name: Push backend Docker image
         run: |
