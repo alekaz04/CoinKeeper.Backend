@@ -1,3 +1,4 @@
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -56,8 +57,8 @@ namespace CoinKeeper.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     OperationTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Amount = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     OperationType = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
@@ -73,19 +74,19 @@ namespace CoinKeeper.Infrastructure.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Operation_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: ["Id", "CreatedAt", "IsDeleted", "Login", "PasswordHash", "PasswordSalt", "RefreshToken", "UpdatedAt"],
-                values: [new Guid("00000000-0000-0000-0000-000000000001"), new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), false, "dev", "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=", "HPdneFiNa8P3C92uUdWLGA==", null, new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))]);
+                columns: new[] { "Id", "CreatedAt", "IsDeleted", "Login", "PasswordHash", "PasswordSalt", "RefreshToken", "UpdatedAt" },
+                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), false, "dev", "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=", "HPdneFiNa8P3C92uUdWLGA==", null, new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Category_UserId",
