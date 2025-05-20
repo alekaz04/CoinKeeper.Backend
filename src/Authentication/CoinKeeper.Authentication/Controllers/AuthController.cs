@@ -24,7 +24,7 @@ public class AuthController : CommonApiController
     /// <param name="userDto">Логин и пароль</param>
     /// <param name="token">Токен отмены запроса</param>
     /// <returns>Пользователь + Пара Access и Refresh токен</returns>
-    [HttpPost("sign-in")]
+    [HttpPost]
     [AllowAnonymous]
     public async Task<UserResponseDto> Authenticate([FromBody] RequestUserDto userDto, CancellationToken token)
     {
@@ -32,11 +32,11 @@ public class AuthController : CommonApiController
     }
 
     /// <summary>
-    /// Получить новый Access токен по refrash токену
+    /// Получить новый Access токен по refresh токену
     /// </summary>
     /// <param name="refreshToken">Токен обновления</param>
-    /// <param name="token">Токен отмены запрсы</param>
-    /// <returns>Новая пара Access и Refrash токена</returns>
+    /// <param name="token">Токен отмены запросы</param>
+    /// <returns>Новая пара Access и Refresh токена</returns>
     [HttpGet]
     [AllowAnonymous]
     public async Task<AuthToken> RefreshToken([FromQuery] string refreshToken, CancellationToken token)

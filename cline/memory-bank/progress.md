@@ -4,11 +4,11 @@
 
 **Project Stage**: Early Development / Feature Implementation
 
-**Last Updated**: May 17, 2025
+**Last Updated**: May 20, 2025
 
-**Overall Analysis Progress**: ~45% of MVP features analyzed
+**Overall Analysis Progress**: ~50% of MVP features analyzed
 
-**Latest Document**: [CoinKeeper_Tasks_10_05_25.md](../analyse/CoinKeeper_Tasks_10_05_25.md) - Plan of next tasks
+**Latest Document**: [CoinKeeper_Tasks_20_05_25.md](../analyse/CoinKeeper_Tasks_20_05_25.md) - План расширения функциональности
 
 ## What Has Been Analyzed
 
@@ -94,11 +94,33 @@
 
 ### Future Enhancement Analysis
 
-1. **Multi-currency Support**
-2. **Recurring Transactions**
-3. **Import/Export Functionality**
-4. **Reminders**
-5. **Data Visualization**
+1. **Бюджет пользователя**
+   - [ ] Анализ требований к модели счетов (Account)
+   - [ ] Оценка связи между операциями и счетами
+   - [ ] Анализ подходов к расчету общего баланса
+   - [ ] Оценка вариантов реализации различных типов счетов
+
+2. **Плановые платежи**
+   - [ ] Анализ требований к модели плановых платежей
+   - [ ] Оценка механизмов выполнения плановых платежей
+   - [ ] Анализ подходов к управлению регулярными операциями
+   - [ ] Оценка вариантов реализации различных типов периодичности
+
+3. **Расчет будущих поступлений**
+   - [ ] Анализ алгоритмов прогнозирования баланса
+   - [ ] Оценка подходов к визуализации прогнозов
+   - [ ] Анализ требований к API для получения прогнозов
+   - [ ] Оценка производительности различных подходов к прогнозированию
+
+4. **Отложенные средства**
+   - [ ] Анализ требований к модели целей накопления
+   - [ ] Оценка механизмов перевода средств между доступными и отложенными
+   - [ ] Анализ подходов к отслеживанию прогресса накопления
+   - [ ] Оценка вариантов реализации различных типов целей
+
+5. **Multi-currency Support**
+6. **Import/Export Functionality**
+7. **Data Visualization**
 
 ## Identified Issues
 
@@ -158,7 +180,7 @@
 
 Based on the analysis, the following tasks have been identified for implementation:
 
-### Priority 1 Tasks
+### Текущие приоритетные задачи (из предыдущего анализа)
 
 1. **Add Operation Type**
    - Replace State boolean with OperationType enum
@@ -177,38 +199,49 @@ Based on the analysis, the following tasks have been identified for implementati
    - Enhance validation rules for all entities
    - Add comprehensive error messages
 
-### Priority 2 Tasks
-
-1. **Refactor API Routes**
+5. **Refactor API Routes**
    - Implement RESTful conventions
    - Standardize route naming
 
-2. **Add Filtering and Pagination**
+6. **Add Filtering and Pagination**
    - Implement filtering by various criteria
    - Add pagination support for list endpoints
 
-3. **Implement Balance Calculation**
+7. **Implement Balance Calculation**
    - Add endpoint for period-based balance calculation
    - Create DTOs for request and response
 
-4. **Automate Deployment**
-   - Connect GitHub Actions to deployment process
-   - Implement automatic updates of docker-compose
+### Новые приоритетные задачи (расширение функциональности)
 
-### Priority 3 Tasks
+1. **Добавление бюджета пользователя**
+   - Создание модели счетов (Account)
+   - Реализация API для управления счетами
+   - Привязка операций к счетам
+   - Реализация расчета общего баланса
 
-1. **Implement Reports**
-   - Add category-based reports
-   - Implement top categories analysis
+2. **Внедрение плановых платежей**
+   - Создание модели плановых платежей (PlannedOperation)
+   - Реализация API для управления плановыми платежами
+   - Реализация механизма выполнения плановых платежей
+   - Реализация API для ручного выполнения плановых платежей
 
-2. **Enhance Documentation**
-   - Add XML comments for API methods
-   - Improve Swagger documentation
+3. **Расчёт будущих поступлений**
+   - Создание модели для прогнозирования баланса
+   - Реализация сервиса прогнозирования
+   - Реализация API для получения прогноза
+   - Реализация визуализации прогноза (опционально)
 
-3. **Add Extended Features**
-   - Support for multiple currencies
-   - Recurring transactions
-   - Tags for operations
-   - Import/export functionality
+4. **Возможность откладывать деньги**
+   - Расширение модели счетов для поддержки отложенных средств
+   - Создание модели целей накопления (SavingsGoal)
+   - Реализация API для управления отложенными средствами
+   - Реализация механизма перевода средств между доступными и отложенными
 
-See [CoinKeeper_Tasks_10_05_25.md](../analyse/CoinKeeper_Tasks_10_05_25.md) for detailed task descriptions.
+### Оптимальный порядок реализации новых фич
+
+1. **Добавление бюджета пользователя** (основа для остальных фич)
+2. **Внедрение плановых платежей** (необходимо для расчета будущих поступлений)
+3. **Расчёт будущих поступлений** (опирается на плановые платежи)
+4. **Возможность откладывать деньги** (дополняет функциональность бюджета)
+
+См. [CoinKeeper_Tasks_20_05_25.md](../analyse/CoinKeeper_Tasks_20_05_25.md) для подробного описания новых задач.

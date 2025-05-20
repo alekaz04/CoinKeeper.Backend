@@ -96,7 +96,9 @@ This approach follows security best practices by keeping sensitive configuration
 
 ## Приоритетные задачи
 
-На основе последнего анализа (CoinKeeper_Tasks_10_05_25.md), наиболее приоритетными являются:
+На основе последнего анализа (CoinKeeper_Tasks_20_05_25.md), наиболее приоритетными являются:
+
+### Текущие приоритетные задачи (из предыдущего анализа)
 
 1. **Добавление типа операции (OperationType)**:
    - Заменить поле State на enum OperationType (Income/Expense)
@@ -115,6 +117,32 @@ This approach follows security best practices by keeping sensitive configuration
    - Расширить правила валидации для всех сущностей
    - Добавить проверки на корректность данных
 
+### Новые приоритетные задачи (расширение функциональности)
+
+1. **Добавление бюджета пользователя**:
+   - Создание модели счетов (Account)
+   - Реализация API для управления счетами
+   - Привязка операций к счетам
+   - Реализация расчета общего баланса
+
+2. **Внедрение плановых платежей**:
+   - Создание модели плановых платежей (PlannedOperation)
+   - Реализация API для управления плановыми платежами
+   - Реализация механизма выполнения плановых платежей
+   - Реализация API для ручного выполнения плановых платежей
+
+3. **Расчёт будущих поступлений**:
+   - Создание модели для прогнозирования баланса
+   - Реализация сервиса прогнозирования
+   - Реализация API для получения прогноза
+   - Реализация визуализации прогноза (опционально)
+
+4. **Возможность откладывать деньги**:
+   - Расширение модели счетов для поддержки отложенных средств
+   - Создание модели целей накопления (SavingsGoal)
+   - Реализация API для управления отложенными средствами
+   - Реализация механизма перевода средств между доступными и отложенными
+
 ## Next Analysis Steps
 
 The following items are the immediate next steps for my code analysis:
@@ -127,6 +155,10 @@ The following items are the immediate next steps for my code analysis:
 6. **Balance Calculation**: Assess how to implement period-based balance calculation
 7. **Reports Implementation**: Evaluate approaches for category-based reports and analytics
 8. **CI/CD Pipeline**: Analyze the complete deployment process from GitHub Actions to docker-compose
+9. **Account Model Design**: Оценить оптимальную структуру модели счетов для поддержки различных типов счетов
+10. **Planned Operations**: Проанализировать подходы к реализации плановых платежей и их выполнению
+11. **Savings Goals**: Оценить варианты реализации целей накопления и отложенных средств
+12. **Balance Forecasting**: Проанализировать алгоритмы прогнозирования баланса на основе плановых платежей
 
 ## Active Analysis Considerations
 
@@ -149,6 +181,11 @@ The following items are the immediate next steps for my code analysis:
 4. What validation rules should be added to ensure data integrity?
 5. How should balance calculation and reporting be implemented?
 6. How should the deployment process be automated from GitHub Actions to actual server deployment?
+7. Какая структура модели счетов (Account) будет оптимальной для поддержки различных типов счетов и валют?
+8. Как лучше реализовать механизм выполнения плановых платежей (фоновая задача или по запросу)?
+9. Какой подход к прогнозированию баланса будет наиболее эффективным и точным?
+10. Как организовать хранение и управление отложенными средствами для обеспечения целостности данных?
+11. Какие дополнительные сущности потребуются для реализации новых фич (Account, PlannedOperation, SavingsGoal)?
 
 ## Important Patterns and Analysis Criteria
 
