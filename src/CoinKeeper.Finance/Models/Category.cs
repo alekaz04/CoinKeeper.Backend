@@ -26,7 +26,7 @@ public class Category : IBaseEntity, IUserSpecifiedEntity, ICategory
     /// <summary>
     /// Операции этой категории
     /// </summary>
-    public ICollection<Operation> Operations { get; set; } = new List<Operation>();
+    public ICollection<Operation> Operations { get; set; } = [];
 
     /// <inheritdoc />
     public Guid UserId { get; set; }
