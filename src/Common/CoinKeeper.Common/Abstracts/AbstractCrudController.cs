@@ -61,7 +61,7 @@ public class AbstractCrudController<TEntity, TEntityDto, TCreateDto> : CommonApi
     /// <param name="id">Идентификатор сущности</param>
     /// <param name="entityDto">Дто сущности</param>
     /// <param name="cancellationToken">Токен отмены запроса</param>
-    [HttpPost("{id:guid}")]
+    [HttpPut("{id:guid}")]
     public async Task Update(Guid id, TEntityDto entityDto, CancellationToken cancellationToken)
     {
         await _handler.Update(id, entityDto, cancellationToken);
