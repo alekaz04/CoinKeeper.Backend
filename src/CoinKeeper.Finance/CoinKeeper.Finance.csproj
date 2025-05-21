@@ -11,9 +11,5 @@
       <ProjectReference Include="..\Common\CoinKeeper.Common\CoinKeeper.Common.csproj" />
       <ProjectReference Include="..\Common\CoinKeeper.Infrastructure\CoinKeeper.Infrastructure.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Models\Dto\Account\" />
-    </ItemGroup>
-
+  
 </Project>
