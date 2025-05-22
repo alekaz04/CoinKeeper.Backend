@@ -1,4 +1,3 @@
-using CoinKeeper.Common;
 using CoinKeeper.Extensions.DependencyInjection;
 using CoinKeeper.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +32,7 @@ public class Startup
     {
         app.UseSwagger();
 
-        app.UseMiddleware<ErrorMiddleware>();
+        app.UseErrorMiddleware();
 
         app.UseRouting();
         app.UseAuthentication().UseAuthorization();

@@ -25,8 +25,6 @@ public class OperationReadDto : IOperation
     /// <inheritdoc />
     public Guid CategoryId { get; set; }
 
-    /// <summary>
-    /// Категория операции
-    /// </summary>
-    public CategoryReadDto? Category { get; set; }
+    /// <inheritdoc />
+    public Guid AccountId { get; set; }
 }

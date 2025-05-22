@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Authentication.Domain;
+using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Common.Domain;
 
 namespace CoinKeeper.Finance;

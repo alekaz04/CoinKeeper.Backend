@@ -29,4 +29,9 @@ public interface IOperation
     /// Идентфикатор категарии траты
     /// </summary>
     public Guid CategoryId { get; set; }
+
+    /// <summary>
+    /// Идентфикатора счёта
+    /// </summary>
+    public Guid AccountId { get; set; }
 }

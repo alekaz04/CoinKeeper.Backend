@@ -9,12 +9,13 @@ using Microsoft.EntityFrameworkCore;
 namespace CoinKeeper.Common;
 
 /// <summary>
-/// Базовый круд хэжндлер
+/// Базовый круд хэндлер
 /// </summary>
 /// <typeparam name="TEntity">Исходная сущность</typeparam>
 /// <typeparam name="TEntityDto">Дто сущности</typeparam>
 /// <typeparam name="TCreateDto">Дто создания сущности</typeparam>
-public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto>
+/// <typeparam name="TUpdateDto">Дто обновления сущности</typeparam>
+public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto, TUpdateDto>
     where TEntity : class, IBaseEntity, IUserSpecifiedEntity
 {
     /// <inheritdoc cref="DataContext"/>
@@ -103,13 +104,18 @@ public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto>
     /// <param name="id">Идентификатор сущности</param>
     /// <param name="entityDto">Дто сущности</param>
     /// <param name="token">Токен отмены запроса</param>
-    public virtual async Task Update(Guid id, TEntityDto entityDto, CancellationToken token)
+    public virtual async Task Update(Guid id, TUpdateDto entityDto, CancellationToken token)
     {
         var currentUserId = _currentUser.GetCurrentUserId();
 
         var entity = await _context.Set<TEntity>()
             .Where(x => x.UserId == currentUserId && !x.IsDeleted && x.Id == id)
             .FirstOrDefaultAsync(token);
+
+        if (entity is null)
+        {
+            throw new CommonErrorException($"Сущность {typeof(TEntity).Name} с идентификатором {id} не найдена");
+        }
 
         _mapper.Map(entityDto, entity);
         await _context.SaveChangesAsync(token);
