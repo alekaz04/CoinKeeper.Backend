@@ -4,11 +4,11 @@
 
 **Project Stage**: Early Development / Feature Implementation
 
-**Last Updated**: May 20, 2025
+**Last Updated**: May 22, 2025
 
-**Overall Analysis Progress**: ~50% of MVP features analyzed
+**Overall Analysis Progress**: ~65% of MVP features analyzed
 
-**Latest Document**: [CoinKeeper_Tasks_20_05_25.md](../analyse/CoinKeeper_Tasks_20_05_25.md) - План расширения функциональности
+**Latest Document**: [CoinKeeper_Analyse_22_05_25.md](../analyse/CoinKeeper_Analyse_22_05_25.md) - Анализ проекта и статья о первой фиче
 
 ## What Has Been Analyzed
 
@@ -19,8 +19,8 @@
 
 2. **Database Setup**
    - Entity Framework Core configuration review
-   - Initial migration analysis with User, Category, and Operation tables
-   - Relationships between entities (User-Operation-Category)
+   - Initial migration analysis with User, Category, Operation, and Account tables
+   - Relationships between entities (User-Operation-Category-Account)
    - Configuration approach (environment variables and user secrets)
 
 3. **API Foundation**
@@ -34,104 +34,128 @@
    - Get operation by ID endpoint analysis
    - Get all operations for current user implementation
    - Operation DTO and mapping configuration
+   - Update and delete operation endpoints analysis
+   - Transaction handling for operations affecting account balance
 
 5. **Category Management**
    - Category entity and relationship with Operation and User
    - Basic CRUD operations for categories
    - Category validation rules
 
-6. **Authentication Framework**
+6. **Account Management**
+   - Account entity and relationship with User and Operation
+   - Basic CRUD operations for accounts
+   - Account balance calculation mechanism
+   - Background service for periodic balance recalculation
+
+7. **Authentication Framework**
    - User entity and configuration
    - JWT authentication setup and token generation
-   - User-Operation-Category relationships
+   - User-Operation-Category-Account relationships
    - CurrentUserService implementation
 
-7. **Development Environment**
+8. **Development Environment**
    - Docker configuration review
    - Swagger UI for API testing assessment
 
-8. **CI/CD Pipeline**
+9. **CI/CD Pipeline**
    - GitHub Actions workflows for dev and release branches
    - Docker image building and publishing to GitHub Container Registry
    - Migration validation in CI pipeline
    - Docker Compose configuration in separate repository
+
+10. **First Feature Analysis**
+    - Comprehensive analysis of the first implemented feature (financial operations management)
+    - Evaluation of strengths and weaknesses
+    - Recommendations for user experience improvements
 
 ## What's Left to Analyze
 
 ### MVP Features Analysis
 
 1. **Complete Operation CRUD**
-   - [ ] Evaluate requirements for update operation endpoint
-   - [ ] Assess delete operation endpoint needs
+   - [x] Evaluate requirements for update operation endpoint
+   - [x] Assess delete operation endpoint needs
    - [ ] Analyze list operations with filtering approach
    - [ ] Review pagination support options
 
 2. **Complete Category CRUD**
-   - [ ] Evaluate requirements for update category endpoint
-   - [ ] Assess delete category endpoint needs
+   - [x] Evaluate requirements for update category endpoint
+   - [x] Assess delete category endpoint needs
    - [ ] Analyze list categories with filtering approach
 
 3. **Operation Type Implementation**
-   - [ ] Analyze requirements for replacing State boolean with OperationType enum
-   - [ ] Assess impact on existing code and database
-   - [ ] Evaluate migration strategy
+   - [x] Analyze requirements for replacing State boolean with OperationType enum
+   - [x] Assess impact on existing code and database
+   - [x] Evaluate migration strategy
+
+4. **Account Management**
+   - [x] Analyze requirements for account entity
+   - [x] Assess relationship with operations
+   - [x] Evaluate balance calculation mechanism
+   - [ ] Review account types and currency support
 
 5. **Financial Reports**
-   - [ ] Analyze balance calculation requirements
+   - [x] Analyze balance calculation requirements
    - [ ] Evaluate expense/income summaries approach
    - [ ] Assess category-based reports design
    - [ ] Review time period reports implementation options
 
 6. **API Improvements**
-   - [ ] Analyze RESTful route naming conventions
-   - [ ] Evaluate input validation enhancement options
+   - [x] Analyze RESTful route naming conventions
+   - [x] Evaluate input validation enhancement options
    - [ ] Assess response standardization approaches
 
 7. **Deployment**
-   - [ ] Review Docker Compose setup requirements
+   - [x] Review Docker Compose setup requirements
    - [ ] Analyze production configuration needs
    - [ ] Evaluate automated deployment options
 
 ### Future Enhancement Analysis
 
 1. **Бюджет пользователя**
-   - [ ] Анализ требований к модели счетов (Account)
-   - [ ] Оценка связи между операциями и счетами
-   - [ ] Анализ подходов к расчету общего баланса
-   - [ ] Оценка вариантов реализации различных типов счетов
+   - [x] Анализ требований к модели счетов (Account)
+   - [x] Оценка связи между операциями и счетами
+   - [x] Анализ подходов к расчету общего баланса
+   - [x] Оценка вариантов реализации различных типов счетов
 
 2. **Плановые платежи**
-   - [ ] Анализ требований к модели плановых платежей
-   - [ ] Оценка механизмов выполнения плановых платежей
-   - [ ] Анализ подходов к управлению регулярными операциями
-   - [ ] Оценка вариантов реализации различных типов периодичности
+   - [x] Анализ требований к модели плановых платежей
+   - [x] Оценка механизмов выполнения плановых платежей
+   - [x] Анализ подходов к управлению регулярными операциями
+   - [x] Оценка вариантов реализации различных типов периодичности
 
 3. **Расчет будущих поступлений**
-   - [ ] Анализ алгоритмов прогнозирования баланса
-   - [ ] Оценка подходов к визуализации прогнозов
-   - [ ] Анализ требований к API для получения прогнозов
+   - [x] Анализ алгоритмов прогнозирования баланса
+   - [x] Оценка подходов к визуализации прогнозов
+   - [x] Анализ требований к API для получения прогнозов
    - [ ] Оценка производительности различных подходов к прогнозированию
 
 4. **Отложенные средства**
-   - [ ] Анализ требований к модели целей накопления
-   - [ ] Оценка механизмов перевода средств между доступными и отложенными
-   - [ ] Анализ подходов к отслеживанию прогресса накопления
+   - [x] Анализ требований к модели целей накопления
+   - [x] Оценка механизмов перевода средств между доступными и отложенными
+   - [x] Анализ подходов к отслеживанию прогресса накопления
    - [ ] Оценка вариантов реализации различных типов целей
 
 5. **Multi-currency Support**
+   - [x] Анализ требований к поддержке валют
+   - [ ] Оценка механизмов конвертации валют
+   - [ ] Анализ подходов к отображению сумм в разных валютах
+
 6. **Import/Export Functionality**
 7. **Data Visualization**
 
 ## Identified Issues
 
-1. **Missing Operation Type**: The Operation entity doesn't have a field to distinguish between income and expense
+1. **Operation Type Implementation**: The Operation entity now has an OperationType enum (Income/Expense) to distinguish between income and expense
 2. **Empty Operation Validator**: OperationValidator class exists but contains no validation rules
-3. **Incomplete API**: Missing update and delete operations for both Operation and Category
-4. **API Routes**: Routes are partially standardized but don't fully follow REST conventions
-5. **Missing Filtering and Pagination**: No support for filtering and pagination in list endpoints
-6. **Documentation**: No XML comments for API documentation
-7. **Empty Configuration**: Connection strings and JWT settings are intentionally empty in appsettings.json
-8. **Manual Deployment**: No automated deployment from CI/CD pipeline to production environment
+3. **API Routes**: Routes are partially standardized but don't fully follow REST conventions
+4. **Missing Filtering and Pagination**: No support for filtering and pagination in list endpoints
+5. **Documentation**: No XML comments for API documentation
+6. **Empty Configuration**: Connection strings and JWT settings are intentionally empty in appsettings.json
+7. **Manual Deployment**: No automated deployment from CI/CD pipeline to production environment
+8. **Limited Account Types**: AccountType enum contains only two values (Cash, Card)
+9. **Missing Currency Support**: No support for different currencies in accounts and operations
 
 **Note**: Connection strings and JWT options are intentionally empty in appsettings.json as they are stored in environment variables and user secrets, following security best practices.
 
@@ -160,15 +184,21 @@
 - Review of centralized error handling implementation
 
 ### Data Model Analysis
-- Evaluation of initial Operation entity with basic fields
-- Assessment of DateTimeOffset usage for timestamps
-- Analysis of Guid as primary key type
+- Evaluation of Operation entity with OperationType enum
+- Assessment of Account entity with balance tracking
+- Analysis of relationships between User, Category, Operation, and Account
 - Review of creation and update timestamps tracking
 
 ### API Design Analysis
-- Evaluation of initial non-RESTful route naming (needs refactoring)
+- Evaluation of API routes (still not fully RESTful)
 - Assessment of DTOs for input/output separation
 - Review of Swagger/OpenAPI for documentation
+
+### Balance Calculation Analysis (May 2025)
+- Evaluation of AccountBalanceService for balance calculation
+- Assessment of transaction handling for operations affecting balance
+- Analysis of background service for periodic balance recalculation
+- Review of balance calculation algorithm
 
 ### CI/CD Analysis (May 2025)
 - Evaluation of GitHub Actions workflows for dev and release branches
@@ -178,70 +208,72 @@
 
 ## Next Development Tasks
 
-Based on the analysis, the following tasks have been identified for implementation:
+Based on the latest analysis (CoinKeeper_Analyse_22_05_25.md), the following tasks have been identified for implementation:
 
-### Текущие приоритетные задачи (из предыдущего анализа)
+### Критические улучшения
 
-1. **Add Operation Type**
-   - Replace State boolean with OperationType enum
-   - Update models, DTOs, and mappings
-   - Create database migration
+1. **Настройка базы данных**:
+   - Добавить строку подключения к PostgreSQL в appsettings.json
+   - Альтернативно, использовать переменные окружения для хранения чувствительных данных
 
-2. **Complete CRUD for Operations**
-   - Implement update and delete methods
-   - Add corresponding endpoints
+2. **Настройка JWT**:
+   - Заполнить настройки JWT в appsettings.json
+   - Рассмотреть возможность хранения SecurityKey в секретах или переменных окружения
 
-3. **Complete CRUD for Categories**
-   - Implement update and delete methods
-   - Add corresponding endpoints
+3. **Улучшение валидации**:
+   - Добавить правила валидации для Operation
+   - Расширить валидацию для Account
 
-4. **Improve Validation**
-   - Enhance validation rules for all entities
-   - Add comprehensive error messages
+### Функциональные улучшения
 
-5. **Refactor API Routes**
-   - Implement RESTful conventions
-   - Standardize route naming
+1. **Добавление фильтрации и пагинации**:
+   - Создать DTO для фильтрации операций
+   - Добавить метод в OperationsCrudHandler для фильтрации и пагинации
+   - Добавить соответствующий эндпоинт в OperationController
 
-6. **Add Filtering and Pagination**
-   - Implement filtering by various criteria
-   - Add pagination support for list endpoints
+2. **Расширение типов счетов**:
+   - Расширить enum AccountType (Deposit, Credit, Investment, Savings, Cryptocurrency)
+   - Обновить маппинги и валидацию для поддержки новых типов счетов
 
-7. **Implement Balance Calculation**
-   - Add endpoint for period-based balance calculation
-   - Create DTOs for request and response
+3. **Добавление поддержки валют**:
+   - Создать enum Currency
+   - Добавить поле Currency в модель Account
+   - Обновить DTO и маппинги для поддержки валют
+   - Создать миграцию базы данных
 
-### Новые приоритетные задачи (расширение функциональности)
+4. **Реализация отчетов и аналитики**:
+   - Создать DTO для отчета по категориям
+   - Создать DTO для отчета по периодам
+   - Реализовать ReportHandler для генерации отчетов
+   - Добавить ReportController с эндпоинтами для получения отчетов
 
-1. **Добавление бюджета пользователя**
-   - Создание модели счетов (Account)
-   - Реализация API для управления счетами
-   - Привязка операций к счетам
-   - Реализация расчета общего баланса
+### Архитектурные улучшения
 
-2. **Внедрение плановых платежей**
-   - Создание модели плановых платежей (PlannedOperation)
-   - Реализация API для управления плановыми платежами
-   - Реализация механизма выполнения плановых платежей
-   - Реализация API для ручного выполнения плановых платежей
+1. **Реализация плановых платежей**:
+   - Создать модель PlannedOperation
+   - Создать PlannedOperationCrudHandler для управления плановыми платежами
+   - Реализовать PlannedOperationController с CRUD-операциями
+   - Создать фоновый сервис для автоматического выполнения плановых платежей
 
-3. **Расчёт будущих поступлений**
-   - Создание модели для прогнозирования баланса
-   - Реализация сервиса прогнозирования
-   - Реализация API для получения прогноза
-   - Реализация визуализации прогноза (опционально)
+2. **Реализация отложенных средств**:
+   - Добавить поле SavingsAmount в модель Account
+   - Создать модель SavingsGoal
+   - Реализовать SavingsGoalCrudHandler для управления целями накопления
+   - Добавить SavingsController с операциями для управления отложенными средствами и целями
 
-4. **Возможность откладывать деньги**
-   - Расширение модели счетов для поддержки отложенных средств
-   - Создание модели целей накопления (SavingsGoal)
-   - Реализация API для управления отложенными средствами
-   - Реализация механизма перевода средств между доступными и отложенными
+3. **Реализация прогнозирования баланса**:
+   - Создать DTO для прогноза баланса
+   - Реализовать BalanceForecastService для расчета прогнозируемого баланса
+   - Добавить ForecastController с эндпоинтами для получения прогноза
+   - Реализовать различные сценарии прогнозирования
 
 ### Оптимальный порядок реализации новых фич
 
-1. **Добавление бюджета пользователя** (основа для остальных фич)
-2. **Внедрение плановых платежей** (необходимо для расчета будущих поступлений)
-3. **Расчёт будущих поступлений** (опирается на плановые платежи)
-4. **Возможность откладывать деньги** (дополняет функциональность бюджета)
+1. **Улучшение базовой функциональности** (валидация, фильтрация, пагинация)
+2. **Расширение типов счетов и поддержка валют**
+3. **Реализация отчетов и аналитики**
+4. **Реализация плановых платежей**
+5. **Реализация прогнозирования баланса**
+6. **Реализация отложенных средств и целей накопления**
 
-См. [CoinKeeper_Tasks_20_05_25.md](../analyse/CoinKeeper_Tasks_20_05_25.md) для подробного описания новых задач.
+См. [CoinKeeper_Analyse_22_05_25.md](../analyse/CoinKeeper_Analyse_22_05_25.md) для подробного анализа проекта и рекомендаций по улучшению.

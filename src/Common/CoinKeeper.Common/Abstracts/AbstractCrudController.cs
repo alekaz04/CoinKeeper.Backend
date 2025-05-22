@@ -10,13 +10,14 @@ namespace CoinKeeper.Common;
 /// <typeparam name="TEntity">Исходная сущность</typeparam>
 /// <typeparam name="TEntityDto">Дто сущности</typeparam>
 /// <typeparam name="TCreateDto">Дто создания сущности</typeparam>
-public class AbstractCrudController<TEntity, TEntityDto, TCreateDto> : CommonApiController
+/// <typeparam name="TUpdateDto">Жто обновления сущности</typeparam>
+public class AbstractCrudController<TEntity, TEntityDto, TCreateDto, TUpdateDto> : CommonApiController
     where TEntity : class, IBaseEntity, IUserSpecifiedEntity
 {
     /// <inheritdoc cref="AbstractCrudHandler{TEntity, TEntityDto, TCreateDto}"/>
-    private readonly AbstractCrudHandler<TEntity, TEntityDto, TCreateDto> _handler;
+    private readonly AbstractCrudHandler<TEntity, TEntityDto, TCreateDto, TUpdateDto> _handler;
 
-    public AbstractCrudController(AbstractCrudHandler<TEntity, TEntityDto, TCreateDto> handler)
+    public AbstractCrudController(AbstractCrudHandler<TEntity, TEntityDto, TCreateDto, TUpdateDto> handler)
     {
         _handler = handler;
     }
@@ -62,7 +63,7 @@ public class AbstractCrudController<TEntity, TEntityDto, TCreateDto> : CommonApi
     /// <param name="entityDto">Дто сущности</param>
     /// <param name="cancellationToken">Токен отмены запроса</param>
     [HttpPut("{id:guid}")]
-    public async Task Update(Guid id, TEntityDto entityDto, CancellationToken cancellationToken)
+    public async Task Update(Guid id, TUpdateDto entityDto, CancellationToken cancellationToken)
     {
         await _handler.Update(id, entityDto, cancellationToken);
     }

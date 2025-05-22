@@ -15,14 +15,17 @@ public static class ServiceCollectionExtensions
     /// </summary>
     public static IServiceCollection AddFinance(this IServiceCollection services)
     {
-        services.AddScoped<AbstractCrudHandler<Operation, OperationReadDto, OperationCreateDto>, OperationsCrudHandler>();
-        services.AddScoped<AbstractCrudHandler<Category, CategoryReadDto, CategoryCreateDto>, CategoryCrudHandler>();
+        services.AddScoped<AbstractCrudHandler<Operation, OperationReadDto, OperationCreateDto, OperationUpdateDto>, OperationsCrudHandler>();
+        services.AddScoped<AbstractCrudHandler<Category, CategoryReadDto, CategoryCreateDto, CategoryUpdateDto>, CategoryCrudHandler>();
+        services.AddScoped<AbstractCrudHandler<Account, AccountReadDto, AccountCreateDto, AccountUpdateDto>, AccountCrudHandler>();
 
-        services.AddValidatorsFromAssembly(typeof(OperationValidator).Assembly);
+        services.AddValidatorsFromAssembly(typeof(CoinKeeperFinanceModuleAssemblyMark).Assembly);
 
         services.AddAutoMapper(typeof(OperationMapper), typeof(CategoryMapper));
+        services.AddScoped<IAccountBalanceService, AccountBalanceService>();
+        services.AddScoped<IBalanceHandler, BalanceHandler>();
 
-        services.AddScoped<CurrentUserResolver>();
+        services.AddHostedService<RecalculationAllUsersBalanceHostedService>();
         return services;
     }
 }

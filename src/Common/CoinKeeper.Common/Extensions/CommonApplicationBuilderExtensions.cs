@@ -1,3 +1,4 @@
+using CoinKeeper.Common;
 using Microsoft.AspNetCore.Builder;
 
 namespace CoinKeeper.Extensions.DependencyInjection;
@@ -16,7 +17,17 @@ public static class CommonApplicationBuilderExtensions
         app.UseSwaggerUi(options =>
         {
             options.Path = string.Empty;
+            options.DocumentTitle = "CoinKeeper API";
         });
+        return app;
+    }
+
+    /// <summary>
+    /// Добавить миддлвар отлова ошибок
+    /// </summary>
+    public static IApplicationBuilder UseErrorMiddleware(this IApplicationBuilder app)
+    {
+        app.UseMiddleware<ErrorMiddleware>();
         return app;
     }
 }

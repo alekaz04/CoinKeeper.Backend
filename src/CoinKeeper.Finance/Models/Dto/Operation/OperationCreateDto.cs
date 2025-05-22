@@ -19,4 +19,7 @@ public class OperationCreateDto : IOperation
 
     /// <inheritdoc />
     public Guid CategoryId { get; set; }
+
+    /// <inheritdoc />
+    public Guid AccountId { get; set; }
 }

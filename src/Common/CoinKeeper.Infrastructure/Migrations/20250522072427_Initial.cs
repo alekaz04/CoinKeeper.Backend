@@ -29,6 +29,30 @@ namespace CoinKeeper.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Account",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    Balance = table.Column<decimal>(type: "numeric", nullable: false),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Account", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Account_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -63,11 +87,18 @@ namespace CoinKeeper.Infrastructure.Migrations
                     UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AccountId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Operation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Operation_Account_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Account",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Operation_Category_CategoryId",
                         column: x => x.CategoryId,
@@ -88,9 +119,19 @@ namespace CoinKeeper.Infrastructure.Migrations
                 values: [new Guid("00000000-0000-0000-0000-000000000001"), new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), false, "dev", "TGnvarYGHoF/sKZ+pRblGK4BojpIqFjzpnU+3nLDhdc=", "HPdneFiNa8P3C92uUdWLGA==", null, new DateTimeOffset(new DateTime(2025, 1, 1, 1, 1, 1, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))]);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Account_UserId",
+                table: "Account",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Category_UserId",
                 table: "Category",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Operation_AccountId",
+                table: "Operation",
+                column: "AccountId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Operation_CategoryId",
@@ -108,6 +149,9 @@ namespace CoinKeeper.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Operation");
+
+            migrationBuilder.DropTable(
+                name: "Account");
 
             migrationBuilder.DropTable(
                 name: "Category");

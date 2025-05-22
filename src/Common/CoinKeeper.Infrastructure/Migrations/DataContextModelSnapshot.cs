@@ -67,6 +67,41 @@ namespace CoinKeeper.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CoinKeeper.Finance.Account", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Account");
+                });
+
             modelBuilder.Entity("CoinKeeper.Finance.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -102,6 +137,9 @@ namespace CoinKeeper.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uuid");
+
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
@@ -133,11 +171,24 @@ namespace CoinKeeper.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountId");
+
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Operation");
+                });
+
+            modelBuilder.Entity("CoinKeeper.Finance.Account", b =>
+                {
+                    b.HasOne("CoinKeeper.Authentication.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CoinKeeper.Finance.Category", b =>
@@ -153,6 +204,12 @@ namespace CoinKeeper.Infrastructure.Migrations
 
             modelBuilder.Entity("CoinKeeper.Finance.Operation", b =>
                 {
+                    b.HasOne("CoinKeeper.Finance.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CoinKeeper.Finance.Category", "Category")
                         .WithMany("Operations")
                         .HasForeignKey("CategoryId")
@@ -164,6 +221,8 @@ namespace CoinKeeper.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Account");
 
                     b.Navigation("Category");
 

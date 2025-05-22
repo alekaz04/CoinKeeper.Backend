@@ -11,5 +11,5 @@
       <ProjectReference Include="..\Common\CoinKeeper.Common\CoinKeeper.Common.csproj" />
       <ProjectReference Include="..\Common\CoinKeeper.Infrastructure\CoinKeeper.Infrastructure.csproj" />
     </ItemGroup>
-
+  
 </Project>

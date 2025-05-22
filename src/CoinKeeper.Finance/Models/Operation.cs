@@ -47,4 +47,14 @@ public class Operation : IBaseEntity, IUserSpecifiedEntity, IOperation
 
     /// <inheritdoc/>
     public User? User { get; set; }
+
+    /// <summary>
+    /// Идентификатор счета
+    /// </summary>
+    public Guid AccountId { get; set; }
+
+    /// <summary>
+    /// Счёт
+    /// </summary>
+    public Account? Account { get; set; }
 }

@@ -1,3 +1,4 @@
+using CoinKeeper.Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSwag;
@@ -17,7 +18,9 @@ public static class CommonServiceCollectionExtensions
     public static IServiceCollection AddCommon(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddLogging(configuration)
-            .AddSwaggerWithAuth();
+            .AddSwaggerWithAuth()
+            .AddScoped<CurrentUserResolver>();
+
         return services;
     }
 
@@ -45,7 +48,7 @@ public static class CommonServiceCollectionExtensions
         {
             options.AddSecurity("Bearer", new OpenApiSecurityScheme
             {
-                Description = "",
+                Description = "Bearer Auth token is needed",
                 Type = OpenApiSecuritySchemeType.Http,
                 In = OpenApiSecurityApiKeyLocation.Header,
                 Name = "Authorization",
