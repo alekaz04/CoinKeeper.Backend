@@ -1,0 +1,33 @@
+﻿name: CoinKeeper pr
+
+on:
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj
+
+      - name: Build project
+        run: dotnet build ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj --no-restore -warnaserror
+
+      - name: Install dotnet-ef tool
+        run: dotnet tool install --global dotnet-ef
+
+      - name: Add dotnet tools to PATH
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+      - name: Check for pending EF Core migrations
+        run: dotnet ef migrations has-pending-model-changes --project ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj
