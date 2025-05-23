@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Logging;
+using CoinKeeper.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Protocols.Configuration;

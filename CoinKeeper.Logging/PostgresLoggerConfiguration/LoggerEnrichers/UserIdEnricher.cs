@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Authentication;
+using CoinKeeper.Authentication;
 using CoinKeeper.Authentication.Domain;
 using Microsoft.AspNetCore.Http;
 using Serilog.Core;
@@ -9,7 +9,7 @@ namespace CoinKeeper.Logging;
 /// <summary>
 /// Энричер идентфикатора пользователя
 /// </summary>
-public class UserIdEnricher: ILogEventEnricher
+public class UserIdEnricher : ILogEventEnricher
 {
     /// <inheritdoc cref="ICurrentUser"/>
     private readonly ICurrentUser _currentUser;

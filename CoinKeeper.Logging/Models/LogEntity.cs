@@ -1,4 +1,4 @@
-﻿namespace CoinKeeper.Logging;
+namespace CoinKeeper.Logging;
 
 /// <summary>
 /// Сущность записи лога

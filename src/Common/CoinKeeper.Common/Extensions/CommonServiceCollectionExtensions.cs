@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSwag;
 using NSwag.Generation.Processors.Security;
-using Serilog;
 
 namespace CoinKeeper.Extensions.DependencyInjection;
 
