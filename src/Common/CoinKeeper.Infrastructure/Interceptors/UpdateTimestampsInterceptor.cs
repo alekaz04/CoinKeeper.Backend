@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Common.Domain;
+using CoinKeeper.Common.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 

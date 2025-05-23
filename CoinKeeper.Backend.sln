@@ -32,7 +32,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yml", "yml", "{3FDAA87E-7DD
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\back-dev.yml = .github\workflows\back-dev.yml
 		.github\workflows\back-release.yml = .github\workflows\back-release.yml
+		.github\workflows\back-pr.yml = .github\workflows\back-pr.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinKeeper.Logging", "CoinKeeper.Logging\CoinKeeper.Logging.csproj", "{4EA15AD7-9E31-4D1D-A4DD-55DEF15351BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +71,10 @@ Global
 		{199342BE-360B-453B-8198-0B97E2ED23C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{199342BE-360B-453B-8198-0B97E2ED23C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{199342BE-360B-453B-8198-0B97E2ED23C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EA15AD7-9E31-4D1D-A4DD-55DEF15351BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EA15AD7-9E31-4D1D-A4DD-55DEF15351BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EA15AD7-9E31-4D1D-A4DD-55DEF15351BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EA15AD7-9E31-4D1D-A4DD-55DEF15351BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DC680B36-74C3-4460-BA74-1B1122F04034} = {37297192-1FBB-4992-8239-32B29C25553B}
@@ -79,5 +86,6 @@ Global
 		{45919C59-17CC-415E-923E-AB6B4D97B356} = {E37AA7ED-72D1-4CE9-A5E0-05540CBE9F26}
 		{35ABE835-4876-415F-9FC9-520BC21E5464} = {E37AA7ED-72D1-4CE9-A5E0-05540CBE9F26}
 		{199342BE-360B-453B-8198-0B97E2ED23C6} = {5A351B6F-6BD9-42FF-AB0B-A41DE69D984E}
+		{4EA15AD7-9E31-4D1D-A4DD-55DEF15351BB} = {37297192-1FBB-4992-8239-32B29C25553B}
 	EndGlobalSection
 EndGlobal

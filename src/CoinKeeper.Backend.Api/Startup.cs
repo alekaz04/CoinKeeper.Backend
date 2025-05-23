@@ -23,7 +23,8 @@ public class Startup
 
         services.AddCommon(Configuration)
             .AddFinance()
-            .AddAuth(Configuration);
+            .AddAuth(Configuration)
+            .AddCoinKeeperLogging(Configuration);
 
         services.AddDbContext<DataContext>(x => x.UseNpgsql(Configuration.GetConnectionString(nameof(DataContext))));
     }
