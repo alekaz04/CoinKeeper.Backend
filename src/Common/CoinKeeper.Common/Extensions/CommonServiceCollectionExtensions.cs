@@ -17,24 +17,9 @@ public static class CommonServiceCollectionExtensions
     /// </summary>
     public static IServiceCollection AddCommon(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddLogging(configuration)
+        services
             .AddSwaggerWithAuth()
             .AddScoped<CurrentUserResolver>();
-
-        return services;
-    }
-
-    /// <summary>
-    /// Добавить логгирование
-    /// </summary>
-    private static IServiceCollection AddLogging(this IServiceCollection services, IConfiguration configuration)
-    {
-        var log = Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(configuration)
-            .WriteTo.Console()
-            .CreateLogger();
-
-        services.AddSerilog(log);
 
         return services;
     }

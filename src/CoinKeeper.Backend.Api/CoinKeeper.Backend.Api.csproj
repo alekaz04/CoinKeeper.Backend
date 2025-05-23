@@ -22,6 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\CoinKeeper.Logging\CoinKeeper.Logging.csproj" />
       <ProjectReference Include="..\Authentication\CoinKeeper.Authentication\CoinKeeper.Authentication.csproj" />
       <ProjectReference Include="..\CoinKeeper.Finance\CoinKeeper.Finance.csproj" />
       <ProjectReference Include="..\Common\CoinKeeper.Common\CoinKeeper.Common.csproj" />

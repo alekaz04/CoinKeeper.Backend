@@ -33,4 +33,21 @@ public class CurrentUserService : ICurrentUser
 
         return new Guid(userIdClaim.Value);
     }
+
+    public Guid? TryGetCurrentUserId()
+    {
+        if (_httpContextAccessor.HttpContext is null)
+        {
+            return null;
+        }
+
+        var userIdClaim = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+        if (userIdClaim is null)
+        {
+            return null;
+        }
+
+        return new Guid(userIdClaim.Value);
+    }
 }
