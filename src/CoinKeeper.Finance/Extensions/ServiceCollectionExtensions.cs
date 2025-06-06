@@ -18,6 +18,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<AbstractCrudHandler<Operation, OperationReadDto, OperationCreateDto, OperationUpdateDto>, OperationsCrudHandler>();
         services.AddScoped<AbstractCrudHandler<Category, CategoryReadDto, CategoryCreateDto, CategoryUpdateDto>, CategoryCrudHandler>();
         services.AddScoped<AbstractCrudHandler<Account, AccountReadDto, AccountCreateDto, AccountUpdateDto>, AccountCrudHandler>();
+        services.AddScoped<AbstractCrudHandler<PlannedOperation, PlannedOperationReadDto, PlannedOperationCreateDto, PlannedOperationUpdateDto>, PlannedOperationCrudHandler>();
 
         services.AddValidatorsFromAssembly(typeof(CoinKeeperFinanceModuleAssemblyMark).Assembly);
 
