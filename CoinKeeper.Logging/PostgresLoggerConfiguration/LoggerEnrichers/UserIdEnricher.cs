@@ -7,7 +7,7 @@ using Serilog.Events;
 namespace CoinKeeper.Logging;
 
 /// <summary>
-/// Энричер идентфикатора пользователя
+/// Энричер идентификатора пользователя
 /// </summary>
 public class UserIdEnricher : ILogEventEnricher
 {

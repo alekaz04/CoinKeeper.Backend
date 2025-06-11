@@ -23,7 +23,6 @@ public class ErrorMiddleware
         _logger = logger;
     }
 
-    /// <inheritdoc />
     public async Task Invoke(HttpContext context)
     {
         try

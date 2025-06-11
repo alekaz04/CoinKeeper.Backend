@@ -6,7 +6,7 @@ namespace CoinKeeper.Logging;
 public class LogEntity
 {
     /// <summary>
-    /// Идентфикатор
+    /// Идентификатор
     /// </summary>
     public Guid Id { get; set; }
 
