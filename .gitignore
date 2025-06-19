@@ -372,3 +372,6 @@ FodyWeavers.xsd
 /Microservices/Telemetry/connectors/SteppeOpc
 /Microservices/Telemetry.Server/connectors
 *.DotSettings
+
+# sonarqube analyse
+.sonarqube/
