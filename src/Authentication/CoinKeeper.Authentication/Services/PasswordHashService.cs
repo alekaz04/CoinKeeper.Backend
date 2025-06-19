@@ -21,7 +21,7 @@ public class PasswordHashService
     /// <summary>
     /// Количество итераций
     /// </summary>
-    private const int Iterations = 500;
+    private const int Iterations = 100001;
 
     /// <summary>
     /// Захэшировать пароль
