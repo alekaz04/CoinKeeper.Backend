@@ -40,11 +40,6 @@ public class AccountBalanceService : IAccountBalanceService
         await _context.SaveChangesAsync(token);
     }
 
-    /// <summary>
-    /// Обновляет баланс У ВСЕХ пользователей
-    /// </summary>
-    /// <param name="cancellationToken">Токен отмены запроса</param>
-    /// <remarks>Вызывать ТОЛЬКО в бэкграунд сервисе, тк могут быть проблемы с производительностью</remarks>
     public async Task UpdateAllAccountBalances(CancellationToken cancellationToken)
     {
         var userIds = await _context.Set<User>()

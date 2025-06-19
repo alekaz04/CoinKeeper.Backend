@@ -6,7 +6,7 @@ namespace CoinKeeper.Authentication;
 /// <summary>
 /// Сервис для хэширования пароля
 /// </summary>
-public class PasswordHashService
+public static class PasswordHashService
 {
     /// <summary>
     /// Размер соли
@@ -21,14 +21,14 @@ public class PasswordHashService
     /// <summary>
     /// Количество итераций
     /// </summary>
-    private const int Iterations = 500;
+    private const int Iterations = 100001;
 
     /// <summary>
     /// Захэшировать пароль
     /// </summary>
     /// <param name="password">Пароль</param>
     /// <returns>Хэш пароля + соль</returns>
-    public UserPasswordDto Hash(string password)
+    public static UserPasswordDto Hash(string password)
     {
         byte[] salt = GenerateSalt();
         byte[] hash = new Rfc2898DeriveBytes(
@@ -50,7 +50,7 @@ public class PasswordHashService
     /// </summary>
     /// <param name="password">Пароль</param>
     /// <param name="salt">Соль</param>
-    public string HashWithCurrentSalt(string password, string salt)
+    public static string HashWithCurrentSalt(string password, string salt)
     {
         byte[] hash = new Rfc2898DeriveBytes(
             password,

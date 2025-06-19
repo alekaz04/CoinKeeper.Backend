@@ -3,7 +3,7 @@ namespace CoinKeeper.Backend.Api;
 /// <summary>
 /// Класс точка входа
 /// </summary>
-public class Program
+internal static class Program
 {
     /// <summary>
     /// Запуск сервера

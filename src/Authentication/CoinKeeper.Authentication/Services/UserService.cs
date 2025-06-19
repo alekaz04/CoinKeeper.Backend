@@ -18,20 +18,14 @@ public class UserService
 
     /// <inheritdoc cref="IMapper"/>
     private readonly IMapper _mapper;
-
-    /// <inheritdoc cref="PasswordHashService"/>
-    private readonly PasswordHashService _passwordHashService;
-
     public UserService(
         DataContext context,
         IValidator<RequestUserDto> validator,
-        IMapper mapper,
-        PasswordHashService passwordHashService)
+        IMapper mapper)
     {
         _context = context;
         _validator = validator;
         _mapper = mapper;
-        _passwordHashService = passwordHashService;
     }
 
 
@@ -43,10 +37,10 @@ public class UserService
     /// <returns>Идентификатор</returns>
     public async Task<Guid> CreateUser(RequestUserDto userDto, CancellationToken token)
     {
-        _validator.ValidateAndThrow(userDto);
+        await _validator.ValidateAndThrowAsync(userDto, token);
 
         var user = _mapper.Map<User>(userDto);
-        var userPassword = _passwordHashService.Hash(userDto.Password);
+        var userPassword = PasswordHashService.Hash(userDto.Password);
 
         user.PasswordHash = userPassword.Password;
         user.PasswordSalt = userPassword.Salt;

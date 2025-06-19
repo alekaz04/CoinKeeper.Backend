@@ -54,7 +54,7 @@ public class JsonWebTokenService
     /// <summary>
     /// Сгенерировать Refresh токен
     /// </summary>
-    private string GenerateRefreshToken()
+    private static string GenerateRefreshToken()
     {
         byte[] randomNumber = new byte[64];
 

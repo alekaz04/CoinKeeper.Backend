@@ -22,6 +22,7 @@ public class RecalculationAllUsersBalanceHostedService : BackgroundService
         while (!stoppingToken.IsCancellationRequested && await timer.WaitForNextTickAsync(stoppingToken))
         {
             using var scope = _serviceScopeFactory.CreateScope();
+            _logger.LogInformation("Recalculating all users balance");
             var balanceService = scope.ServiceProvider.GetRequiredService<IAccountBalanceService>();
             await balanceService.UpdateAllAccountBalances(stoppingToken);
         }

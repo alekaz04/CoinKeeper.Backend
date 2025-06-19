@@ -10,20 +10,15 @@ namespace CoinKeeper.Authentication;
 /// </summary>
 public class AuthUserService
 {
-    /// <inheritdoc cref="PasswordHashService"/>
-    private readonly PasswordHashService _passwordHashService;
-
     /// <inheritdoc cref="DataContext"/>
     private readonly DataContext _context;
 
     /// <inheritdoc cref="JsonWebTokenService"/>
     private readonly JsonWebTokenService _jwtService;
 
-    public AuthUserService(PasswordHashService passwordHashService,
-        DataContext context,
+    public AuthUserService(DataContext context,
         JsonWebTokenService jwtService)
     {
-        _passwordHashService = passwordHashService;
         _context = context;
         _jwtService = jwtService;
     }
@@ -44,7 +39,7 @@ public class AuthUserService
             throw new CommonErrorException($"Пользователь с ником {userDto.Login} не найден");
         }
 
-        string passwordUserHash = _passwordHashService.HashWithCurrentSalt(userDto.Password, user.PasswordSalt!);
+        string passwordUserHash = PasswordHashService.HashWithCurrentSalt(userDto.Password, user.PasswordSalt!);
 
         if (!passwordUserHash.Equals(user.PasswordHash, StringComparison.Ordinal))
         {

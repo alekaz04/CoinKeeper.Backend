@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Common;
 using CoinKeeper.Infrastructure;

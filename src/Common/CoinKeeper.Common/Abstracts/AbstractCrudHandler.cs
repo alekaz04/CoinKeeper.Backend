@@ -49,7 +49,7 @@ public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto, TUpda
     /// <returns>Идентификатор созданной сущности</returns>
     public virtual async Task<Guid> Create(TCreateDto createDto, CancellationToken token)
     {
-        _validator.ValidateAndThrow(createDto);
+        await _validator.ValidateAndThrowAsync(createDto, token);
 
         var enitity = _mapper.Map<TEntity>(createDto);
 
@@ -89,13 +89,13 @@ public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto, TUpda
     {
         var currentUserId = _currentUser.GetCurrentUserId();
 
-        var entityDtos = await _context.Set<TEntity>()
+        var entitiesDto = await _context.Set<TEntity>()
             .AsNoTracking()
             .Where(x => x.UserId == currentUserId && !x.IsDeleted)
             .ProjectTo<TEntityDto>(_mapper.ConfigurationProvider)
             .ToListAsync(token);
 
-        return entityDtos;
+        return entitiesDto;
     }
 
     /// <summary>
