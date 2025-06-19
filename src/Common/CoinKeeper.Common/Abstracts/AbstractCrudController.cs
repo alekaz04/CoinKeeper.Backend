@@ -10,7 +10,7 @@ namespace CoinKeeper.Common;
 /// <typeparam name="TEntity">Исходная сущность</typeparam>
 /// <typeparam name="TEntityDto">Дто сущности</typeparam>
 /// <typeparam name="TCreateDto">Дто создания сущности</typeparam>
-/// <typeparam name="TUpdateDto">Жто обновления сущности</typeparam>
+/// <typeparam name="TUpdateDto">Дто обновления сущности</typeparam>
 public class AbstractCrudController<TEntity, TEntityDto, TCreateDto, TUpdateDto> : CommonApiController
     where TEntity : class, IBaseEntity, IUserSpecifiedEntity
 {
