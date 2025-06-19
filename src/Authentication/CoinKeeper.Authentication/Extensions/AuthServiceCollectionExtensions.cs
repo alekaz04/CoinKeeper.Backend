@@ -36,7 +36,6 @@ public static class AuthServiceCollectionExtensions
         services.AddHttpContextAccessor();
 
         services.AddValidatorsFromAssembly(typeof(RequestUserDtoValidator).Assembly);
-        services.AddSingleton<PasswordHashService>();
 
         services.AddScoped<AuthUserService>();
         services.AddScoped<ICurrentUser, CurrentUserService>();
