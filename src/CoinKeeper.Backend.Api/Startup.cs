@@ -10,7 +10,7 @@ namespace CoinKeeper.Backend.Api;
 public class Startup
 {
     /// <inheritdoc cref="IConfiguration"/>
-    public IConfiguration Configuration { get; }
+    private IConfiguration Configuration { get; }
 
     public Startup(IConfiguration configuration)
     {
@@ -24,7 +24,8 @@ public class Startup
         services.AddCommon(Configuration)
             .AddFinance()
             .AddAuth(Configuration)
-            .AddCoinKeeperLogging(Configuration);
+            .AddCoinKeeperLogging(Configuration)
+            .AddCoinKeeperHangfire(Configuration);
 
         services.AddDbContext<DataContext>(x => x.UseNpgsql(Configuration.GetConnectionString(nameof(DataContext))));
     }

@@ -27,6 +27,7 @@
       <ProjectReference Include="..\CoinKeeper.Logging\CoinKeeper.Logging.csproj" />
       <ProjectReference Include="..\Common\CoinKeeper.Common\CoinKeeper.Common.csproj" />
       <ProjectReference Include="..\Common\CoinKeeper.Infrastructure\CoinKeeper.Infrastructure.csproj" />
+      <ProjectReference Include="..\Hangfire\CoinKeeper.Hangfire.AspNetCore\CoinKeeper.Hangfire.AspNetCore.csproj" />
     </ItemGroup>
 
 </Project>
