@@ -10,6 +10,7 @@
       <ProjectReference Include="..\Authentication\CoinKeeper.Authentication.Domain\CoinKeeper.Authentication.Domain.csproj" />
       <ProjectReference Include="..\Common\CoinKeeper.Common\CoinKeeper.Common.csproj" />
       <ProjectReference Include="..\Common\CoinKeeper.Infrastructure\CoinKeeper.Infrastructure.csproj" />
+      <ProjectReference Include="..\Hangfire\CoinKeeper.Hangfire.AspNetCore\CoinKeeper.Hangfire.AspNetCore.csproj" />
     </ItemGroup>
   
 </Project>

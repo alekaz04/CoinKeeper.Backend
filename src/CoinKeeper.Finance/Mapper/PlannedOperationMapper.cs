@@ -14,5 +14,8 @@ public class PlannedOperationMapper : Profile
         CreateMap<PlannedOperation, PlannedOperationReadDto>();
 
         CreateMap<PlannedOperationUpdateDto, PlannedOperation>();
+
+
+        CreateMap<PlannedOperation, Operation>();
     }
 }

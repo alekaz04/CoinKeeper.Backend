@@ -26,7 +26,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IAccountBalanceService, AccountBalanceService>();
         services.AddScoped<IBalanceHandler, BalanceHandler>();
 
-        services.AddHostedService<RecalculationAllUsersBalanceHostedService>();
+        services.AddHangfireJob<RecalculationAllUsersBalanceJob>();
         return services;
     }
 }

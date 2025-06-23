@@ -36,6 +36,8 @@ public class Startup
 
         app.UseErrorMiddleware();
 
+        app.UseCoinKeeperHangfire();
+
         app.UseRouting();
         app.UseAuthentication().UseAuthorization();
         app.UseEndpoints(x => x.MapControllers());
