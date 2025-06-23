@@ -1,4 +1,5 @@
-﻿using CoinKeeper.Hangfire.AspNetCore;
+﻿using AutoMapper;
+using CoinKeeper.Hangfire.AspNetCore;
 using CoinKeeper.Infrastructure;
 using Hangfire;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,15 @@ public class PlannedOperationsJob : IHangfireRecurringJob
     public RecurringJobOptions? JobOptions { get; }
 
     private readonly IDbContextFactory<DataContext> _contextFactory;
+    private readonly IMapper _mapper;
+    private readonly IAccountBalanceService _balanceService;
 
 
-    public PlannedOperationsJob(IDbContextFactory<DataContext> contextFactory)
+    public PlannedOperationsJob(IDbContextFactory<DataContext> contextFactory, IMapper mapper, IAccountBalanceService balanceService)
     {
         _contextFactory = contextFactory;
+        _mapper = mapper;
+        _balanceService = balanceService;
     }
 
     public async Task Execute(CancellationToken token)
@@ -26,19 +31,16 @@ public class PlannedOperationsJob : IHangfireRecurringJob
             .Include(p => p.User)
             .Include(x => x.Account)
             .Where(x => x.NextExecutionDate.DayOfYear == DateTimeOffset.Now.DayOfYear)
+            .Where(x => x.IsActive && !x.IsDeleted)
             .ToListAsync(cancellationToken: token);
 
         foreach (var plannedOperation in plannedOperations)
         {
-            var operation = new Operation()
-            {
-                Id = Guid.NewGuid(),
-                OperationTime = DateTimeOffset.UtcNow,
-                Amount = plannedOperation.Amount,
-                Description = "",
-                OperationType = plannedOperation.OperationType,
+            var operation = _mapper.Map<Operation>(plannedOperation);
+            await _balanceService.ApplyOperationToBalance(plannedOperation.UserId, operation, token);
 
-            };
+            plannedOperation.NextExecutionDate.Add(plannedOperation.);
+
         }
 
 

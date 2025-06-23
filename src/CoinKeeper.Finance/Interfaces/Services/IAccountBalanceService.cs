@@ -4,6 +4,8 @@ public interface IAccountBalanceService
 {
     public Task ApplyOperationToBalance(Operation operation, CancellationToken token);
 
+    public Task ApplyOperationToBalance(Guid userId, Operation operation, CancellationToken token);
+
     /// <summary>
     /// Обновляет баланс У ВСЕХ пользователей
     /// </summary>
