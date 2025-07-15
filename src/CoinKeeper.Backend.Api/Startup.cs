@@ -27,6 +27,8 @@ public class Startup
             .AddCoinKeeperLogging(Configuration)
             .AddCoinKeeperHangfire(Configuration);
 
+        services.AddDbContextFactory<DataContext>(x => x.UseNpgsql(Configuration.GetConnectionString(nameof(DataContext))));
+
         services.AddDbContext<DataContext>(x => x.UseNpgsql(Configuration.GetConnectionString(nameof(DataContext))));
     }
 

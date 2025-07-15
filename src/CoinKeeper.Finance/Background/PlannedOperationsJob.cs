@@ -15,7 +15,6 @@ public class PlannedOperationsJob : IHangfireRecurringJob
     private readonly IMapper _mapper;
     private readonly IAccountBalanceService _balanceService;
 
-
     public PlannedOperationsJob(IDbContextFactory<DataContext> contextFactory, IMapper mapper, IAccountBalanceService balanceService)
     {
         _contextFactory = contextFactory;
@@ -28,7 +27,6 @@ public class PlannedOperationsJob : IHangfireRecurringJob
         var context = await _contextFactory.CreateDbContextAsync(token);
 
         var plannedOperations = await context.Set<PlannedOperation>()
-            .Include(p => p.User)
             .Include(x => x.Account)
             .Where(x => x.NextExecutionDate.DayOfYear == DateTimeOffset.Now.DayOfYear)
             .Where(x => x.IsActive && !x.IsDeleted)
@@ -39,10 +37,9 @@ public class PlannedOperationsJob : IHangfireRecurringJob
             var operation = _mapper.Map<Operation>(plannedOperation);
             await _balanceService.ApplyOperationToBalance(plannedOperation.UserId, operation, token);
 
-            plannedOperation.NextExecutionDate.Add(plannedOperation.);
-
+            plannedOperation.NextExecutionDate = plannedOperation.NextExecutionDate.Add(plannedOperation.ScheduledTime);
         }
 
-
+        await context.SaveChangesAsync(token);
     }
 }

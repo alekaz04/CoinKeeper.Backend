@@ -6,6 +6,7 @@ public class PlannedOperationCreateDto
     public decimal Amount { get; set; }
     public OperationType OperationType { get; set; }
     public string Description { get; set; } = string.Empty;
+    public TimeSpan ScheduledTime { get; set; }
 
     public Guid CategoryId { get; set; }
     public Guid AccountId { get; set; }

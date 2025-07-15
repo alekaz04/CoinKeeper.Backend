@@ -21,7 +21,7 @@ public class PlannedOperation : IBaseEntity, IUserSpecifiedEntity, IPlannedOpera
     public Account? Account { get; set; }
     public DateTimeOffset NextExecutionDate { get; set; }
 
-    public
+    public TimeSpan ScheduledTime { get; set; }
 
     public bool IsActive { get; set; }
     public Guid UserId { get; set; }
