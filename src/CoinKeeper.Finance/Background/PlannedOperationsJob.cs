@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CoinKeeper.Hangfire.AspNetCore;
 using CoinKeeper.Infrastructure;
 using Hangfire;

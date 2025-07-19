@@ -1,4 +1,4 @@
-﻿using Hangfire;
+using Hangfire;
 using Hangfire.Storage;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

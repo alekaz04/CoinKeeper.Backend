@@ -1,4 +1,4 @@
-﻿using CoinKeeper.Hangfire.AspNetCore;
+using CoinKeeper.Hangfire.AspNetCore;
 using CoinKeeper.Infrastructure;
 using Hangfire;
 using Hangfire.PostgreSql;
