@@ -1,4 +1,4 @@
-﻿namespace CoinKeeper.Finance;
+namespace CoinKeeper.Finance;
 
 /// <summary>
 /// DTO для списка предварительного просмотра

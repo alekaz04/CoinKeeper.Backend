@@ -1,4 +1,3 @@
-﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -78,7 +77,7 @@ namespace CoinKeeper.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PlannedOperations_IsActive_IsDeleted_IsPaused",
                 table: "PlannedOperations",
-                columns: new[] { "IsActive", "IsDeleted", "IsPaused" });
+                columns: ["IsActive", "IsDeleted", "IsPaused"]);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlannedOperations_NextExecutionDate",
