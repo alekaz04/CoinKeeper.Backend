@@ -373,5 +373,5 @@ FodyWeavers.xsd
 /Microservices/Telemetry.Server/connectors
 *.DotSettings
 
-# SonarQube static analyse files
+# sonarqube analyse
 .sonarqube/

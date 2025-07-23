@@ -40,20 +40,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GT_PAT }}
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       # Сборка и публикация Docker-образа для миграций
       - name: Build migration Docker image
         run: |
-          docker build -f ./src/Common/CoinKeeper.Infrastructure/Dockerfile -t ghcr.io/alekaz04/coinkeeper/migration-bundle:${GITHUB_REF_NAME} .
-
-      - name: Push migration Docker image
-        run: |
-          docker push ghcr.io/alekaz04/coinkeeper/migration-bundle:${GITHUB_REF_NAME}
+          docker buildx build --platform linux/amd64,linux/arm64 -f ./src/Common/CoinKeeper.Infrastructure/Dockerfile -t ghcr.io/alekaz04/coinkeeper/migration-bundle:${GITHUB_REF_NAME} --push .
 
       # Сборка и публикация Docker-образа для основного API
       - name: Build backend Docker image
         run: |
-          docker build -f ./src/CoinKeeper.Backend.Api/Dockerfile -t ghcr.io/alekaz04/coinkeeper/backend:${GITHUB_REF_NAME} .
-
-      - name: Push backend Docker image
-        run: |
-          docker push ghcr.io/alekaz04/coinkeeper/backend:${GITHUB_REF_NAME}
+          docker buildx build --platform linux/amd64,linux/arm64 -f ./src/CoinKeeper.Backend.Api/Dockerfile -t ghcr.io/alekaz04/coinkeeper/backend:${GITHUB_REF_NAME} --push .
