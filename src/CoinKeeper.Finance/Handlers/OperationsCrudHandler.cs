@@ -24,6 +24,7 @@ public class OperationsCrudHandler : AbstractCrudHandler<Operation, OperationRea
         _context = context;
     }
 
+    /// <inheritdoc />
     public override async Task<Guid> Create(OperationCreateDto createDto, CancellationToken token)
     {
         await using var transaction = await _context.Database.BeginTransactionAsync(token);
@@ -48,6 +49,7 @@ public class OperationsCrudHandler : AbstractCrudHandler<Operation, OperationRea
         }
     }
 
+    /// <inheritdoc />
     public override async Task Update(Guid id, OperationUpdateDto entityDto, CancellationToken token)
     {
         await using var transaction = await _context.Database.BeginTransactionAsync(token);
@@ -74,6 +76,7 @@ public class OperationsCrudHandler : AbstractCrudHandler<Operation, OperationRea
         }
     }
 
+    /// <inheritdoc />
     public override async Task Delete(Guid id, CancellationToken token)
     {
         await using var transaction = await _context.Database.BeginTransactionAsync(token);

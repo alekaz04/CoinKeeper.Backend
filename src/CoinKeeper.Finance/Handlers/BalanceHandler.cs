@@ -6,10 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoinKeeper.Finance;
 
+/// <summary>
+/// Хэндлер баланаса счёта
+/// </summary>
 public class BalanceHandler : IBalanceHandler
 {
+    /// <inheritdoc cref="DataContext"/>
     private readonly DataContext _context;
+
+    /// <inheritdoc cref="ICurrentUser"/>
     private readonly ICurrentUser _currentUser;
+
+    /// <inheritdoc cref="IMapper"/>
     private readonly IMapper _mapper;
 
     public BalanceHandler(DataContext context, ICurrentUser currentUser, IMapper mapper)
@@ -19,6 +27,7 @@ public class BalanceHandler : IBalanceHandler
         _mapper = mapper;
     }
 
+    /// <inheritdoc />
     public async Task<BalanceUserDto> GetCurrentUserBalance(CancellationToken token)
     {
         var userId = _currentUser.GetCurrentUserId();

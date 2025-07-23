@@ -19,9 +19,18 @@ public class PlannedOperation : IBaseEntity, IUserSpecifiedEntity, IPlannedOpera
     public Category? Category { get; set; }
     public Guid AccountId { get; set; }
     public Account? Account { get; set; }
+
+    public DateTimeOffset StartDate { get; set; }
+    public DateTimeOffset? EndDate { get; set; }
     public DateTimeOffset NextExecutionDate { get; set; }
 
+    public int Frequency { get; set; } = 1; // Каждые N периодов
+    public FrequencyType FrequencyType { get; set; }
     public TimeSpan ScheduledTime { get; set; }
+
+    public int? MaxExecutions { get; set; } // Максимальное количество выполнений
+    public int ExecutedCount { get; set; }  // Количество выполненных операций
+    public bool IsPaused { get; set; }  // Приостановлена ли операция
 
     public bool IsActive { get; set; }
     public Guid UserId { get; set; }

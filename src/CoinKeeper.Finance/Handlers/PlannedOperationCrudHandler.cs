@@ -6,6 +6,9 @@ using FluentValidation;
 
 namespace CoinKeeper.Finance;
 
+/// <summary>
+/// Круд хэндлер для плановых операций
+/// </summary>
 public class PlannedOperationCrudHandler : AbstractCrudHandler<PlannedOperation, PlannedOperationReadDto, PlannedOperationCreateDto, PlannedOperationUpdateDto>
 {
     public PlannedOperationCrudHandler(DataContext context, IMapper mapper, IValidator<PlannedOperationCreateDto> validator, ICurrentUser currentUser) : base(context, mapper, validator, currentUser)
