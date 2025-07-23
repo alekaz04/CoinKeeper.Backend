@@ -46,9 +46,9 @@ jobs:
       # Сборка и публикация Docker-образа для миграций
       - name: Build migration Docker image
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -f ./src/Common/CoinKeeper.Infrastructure/Dockerfile -t ghcr.io/alekaz04/coinkeeper/migration-bundle:${GITHUB_REF_NAME} --push .
+          docker buildx build --platform linux/arm64 -f ./src/Common/CoinKeeper.Infrastructure/Dockerfile -t ghcr.io/alekaz04/coinkeeper/migration-bundle:${GITHUB_REF_NAME} --push .
 
       # Сборка и публикация Docker-образа для основного API
       - name: Build backend Docker image
         run: |
-          docker buildx build --platform linux/amd64,linux/arm64 -f ./src/CoinKeeper.Backend.Api/Dockerfile -t ghcr.io/alekaz04/coinkeeper/backend:${GITHUB_REF_NAME} --push .
+          docker buildx build --platform linux/arm64 -f ./src/CoinKeeper.Backend.Api/Dockerfile -t ghcr.io/alekaz04/coinkeeper/backend:${GITHUB_REF_NAME} --push .

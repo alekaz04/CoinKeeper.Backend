@@ -18,10 +18,15 @@ public class AccountBalanceService : IAccountBalanceService
 
     public async Task ApplyOperationToBalance(Operation operation, CancellationToken token)
     {
-        var user = _currentUser.GetCurrentUserId();
+        var userId = _currentUser.GetCurrentUserId();
 
+        await ApplyOperationToBalance(userId, operation, token);
+    }
+
+    public async Task ApplyOperationToBalance(Guid userId, Operation operation, CancellationToken token)
+    {
         var account = await _context.Set<Account>()
-            .FirstOrDefaultAsync(a => a.Id == operation.AccountId && a.UserId == user, token);
+            .FirstOrDefaultAsync(a => a.Id == operation.AccountId && a.UserId == userId, token);
 
         if (account == null)
         {
@@ -40,11 +45,6 @@ public class AccountBalanceService : IAccountBalanceService
         await _context.SaveChangesAsync(token);
     }
 
-    /// <summary>
-    /// Обновляет баланс У ВСЕХ пользователей
-    /// </summary>
-    /// <param name="cancellationToken">Токен отмены запроса</param>
-    /// <remarks>Вызывать ТОЛЬКО в бэкграунд сервисе, тк могут быть проблемы с производительностью</remarks>
     public async Task UpdateAllAccountBalances(CancellationToken cancellationToken)
     {
         var userIds = await _context.Set<User>()

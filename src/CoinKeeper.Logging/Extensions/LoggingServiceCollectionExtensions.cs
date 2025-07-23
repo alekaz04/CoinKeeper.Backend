@@ -47,12 +47,10 @@ public static class LoggingServiceCollectionExtensions
             .Enrich.With<UserIdEnricher>()
             .CreateLogger();
 
-
         services.AddLogging()
             .AddSerilog(logger);
 
         services.AddScoped<UserIdEnricher>();
-
 
         return services;
     }

@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <UserSecretsId>52bc94c1-eb20-4703-9b7d-3799f61099df</UserSecretsId>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -22,11 +23,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\CoinKeeper.Logging\CoinKeeper.Logging.csproj" />
       <ProjectReference Include="..\Authentication\CoinKeeper.Authentication\CoinKeeper.Authentication.csproj" />
       <ProjectReference Include="..\CoinKeeper.Finance\CoinKeeper.Finance.csproj" />
+      <ProjectReference Include="..\CoinKeeper.Logging\CoinKeeper.Logging.csproj" />
       <ProjectReference Include="..\Common\CoinKeeper.Common\CoinKeeper.Common.csproj" />
       <ProjectReference Include="..\Common\CoinKeeper.Infrastructure\CoinKeeper.Infrastructure.csproj" />
+      <ProjectReference Include="..\Hangfire\CoinKeeper.Hangfire.AspNetCore\CoinKeeper.Hangfire.AspNetCore.csproj" />
     </ItemGroup>
 
 </Project>

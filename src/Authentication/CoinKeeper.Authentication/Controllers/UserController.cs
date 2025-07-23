@@ -21,9 +21,9 @@ public class UserController : CommonApiController
     /// <summary>
     /// Создать пользователя
     /// </summary>
-    /// <param name="userDto">Запрос на создания пользователя</param>
+    /// <param name="userDto">Запрос для создания пользователя</param>
     /// <param name="token">Токен отмены запроса</param>
-    /// <returns>Идентфикатор созданного пользователя</returns>
+    /// <returns>Идентификатор созданного пользователя</returns>
     [HttpPost]
     [AllowAnonymous]
     public async Task<Guid> CreateUser([FromBody] RequestUserDto userDto, CancellationToken token)

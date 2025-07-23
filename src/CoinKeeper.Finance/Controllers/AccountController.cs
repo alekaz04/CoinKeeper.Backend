@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoinKeeper.Finance;
 
+/// <summary>
+/// Контроллер для сущности <see cref="Account"/>
+/// </summary>
 public class AccountController : AbstractCrudController<Account, AccountReadDto, AccountCreateDto, AccountUpdateDto>
 {
     private readonly IBalanceHandler _balanceHandler;

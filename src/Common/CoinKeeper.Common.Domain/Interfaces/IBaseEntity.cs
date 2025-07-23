@@ -1,12 +1,12 @@
 namespace CoinKeeper.Common.Domain;
 
 /// <summary>
-/// Базавая сущность системы
+/// Базовая сущность системы
 /// </summary>
 public interface IBaseEntity
 {
     /// <summary>
-    /// Идентфикатор объекта
+    /// Идентификатор объекта
     /// </summary>
     public Guid Id { get; set; }
 

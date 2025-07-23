@@ -18,14 +18,16 @@ public static class ServiceCollectionExtensions
         services.AddScoped<AbstractCrudHandler<Operation, OperationReadDto, OperationCreateDto, OperationUpdateDto>, OperationsCrudHandler>();
         services.AddScoped<AbstractCrudHandler<Category, CategoryReadDto, CategoryCreateDto, CategoryUpdateDto>, CategoryCrudHandler>();
         services.AddScoped<AbstractCrudHandler<Account, AccountReadDto, AccountCreateDto, AccountUpdateDto>, AccountCrudHandler>();
+        services.AddScoped<AbstractCrudHandler<PlannedOperation, PlannedOperationReadDto, PlannedOperationCreateDto, PlannedOperationUpdateDto>, PlannedOperationCrudHandler>();
 
-        services.AddValidatorsFromAssembly(typeof(CoinKeeperFinanceModuleAssemblyMark).Assembly);
+        services.AddValidatorsFromAssembly(typeof(ICoinKeeperFinanceModuleAssemblyMark).Assembly);
 
         services.AddAutoMapper(typeof(OperationMapper), typeof(CategoryMapper));
         services.AddScoped<IAccountBalanceService, AccountBalanceService>();
         services.AddScoped<IBalanceHandler, BalanceHandler>();
 
-        services.AddHostedService<RecalculationAllUsersBalanceHostedService>();
+        services.AddHangfireJob<RecalculationAllUsersBalanceJob>();
+        services.AddHangfireJob<PlannedOperationsJob>();
         return services;
     }
 }
