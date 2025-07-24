@@ -25,7 +25,7 @@ public class PlannedOperationValidator : AbstractValidator<PlannedOperationCreat
             .WithMessage("Счет обязателен для выбора");
 
         RuleFor(x => x.StartDate)
-            .GreaterThanOrEqualTo(DateTimeOffset.Now.Date)
+            .GreaterThanOrEqualTo(DateTimeOffset.UtcNow.Date)
             .WithMessage("Дата начала не может быть в прошлом");
 
         RuleFor(x => x.EndDate)

@@ -2,6 +2,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Common.Domain;
+using CoinKeeper.Common.Domain.Pagination;
 using CoinKeeper.Infrastructure;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -84,18 +85,35 @@ public abstract class AbstractCrudHandler<TEntity, TEntityDto, TCreateDto, TUpda
     /// <summary>
     /// Получить все сущности данного пользователя
     /// </summary>
+    /// <param name="pagination">Параметры пагинации</param>
     /// <param name="token">Токен отмены запроса</param>
-    public virtual async Task<IEnumerable<TEntityDto>> GetAllForUser(CancellationToken token)
+    public virtual async Task<PagedResult<TEntityDto>> GetAllForUser(PaginationRequest pagination, CancellationToken token)
     {
         var currentUserId = _currentUser.GetCurrentUserId();
 
         var entitiesDto = await _context.Set<TEntity>()
             .AsNoTracking()
             .Where(x => x.UserId == currentUserId && !x.IsDeleted)
+            .OrderByDescending(x => x.UpdatedAt)
+            .Skip(pagination.Skip)
+            .Take(pagination.Take)
             .ProjectTo<TEntityDto>(_mapper.ConfigurationProvider)
             .ToListAsync(token);
 
-        return entitiesDto;
+        int count = await _context.Set<TEntity>()
+            .AsNoTracking()
+            .Where(x => x.UserId == currentUserId && !x.IsDeleted)
+            .CountAsync(token);
+
+        var result = new PagedResult<TEntityDto>()
+        {
+            PageNumber = pagination.Skip / pagination.Take,
+            PageSize = pagination.Take,
+            TotalCount = count,
+            Items = entitiesDto
+        };
+
+        return result;
     }
 
     /// <summary>

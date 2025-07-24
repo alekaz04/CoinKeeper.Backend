@@ -32,7 +32,7 @@ public class PlannedOperationsJob : IHangfireRecurringJob
         {
             await using var context = await contextFactory.CreateDbContextAsync(token);
 
-            var now = DateTimeOffset.Now;
+            var now = DateTimeOffset.UtcNow;
 
             // Получаем плановые операции, которые должны быть выполнены
             var plannedOperations = await context.Set<PlannedOperation>()

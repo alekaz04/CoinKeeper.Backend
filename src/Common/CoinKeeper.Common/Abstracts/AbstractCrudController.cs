@@ -1,5 +1,6 @@
 using CoinKeeper.Authentication.Domain;
 using CoinKeeper.Common.Domain;
+using CoinKeeper.Common.Domain.Pagination;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoinKeeper.Common;
@@ -49,11 +50,12 @@ public class AbstractCrudController<TEntity, TEntityDto, TCreateDto, TUpdateDto>
     /// <summary>
     /// Получить все сущности данного пользователя
     /// </summary>
+    /// <param name="pagination">Параметры пагинации</param>
     /// <param name="cancellationToken">Токен отмены запроса</param>
     [HttpGet]
-    public async Task<IEnumerable<TEntityDto>> GetAll(CancellationToken cancellationToken)
+    public async Task<PagedResult<TEntityDto>> GetAll([FromRoute] PaginationRequest pagination, CancellationToken cancellationToken)
     {
-        return await _handler.GetAllForUser(cancellationToken);
+        return await _handler.GetAllForUser(pagination, cancellationToken);
     }
 
     /// <summary>
