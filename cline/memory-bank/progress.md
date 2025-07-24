@@ -4,11 +4,15 @@
 
 **Project Stage**: Early Development / Feature Implementation
 
-**Last Updated**: May 22, 2025
+**Last Updated**: July 24, 2025
 
-**Overall Analysis Progress**: ~65% of MVP features analyzed
+**Overall Analysis Progress**: ~80% of MVP features analyzed
 
-**Latest Document**: [CoinKeeper_Analyse_22_05_25.md](../analyse/CoinKeeper_Analyse_22_05_25.md) - Анализ проекта и статья о первой фиче
+**Latest Document**: [CoinKeeper_Analyse_24_07_25.md](../analyse/CoinKeeper_Analyse_24_07_25.md) - Анализ проекта с реализованными плановыми операциями
+
+**NEW: Frontend Readiness Documents Created (July 24, 2025)**:
+- [CoinKeeper_Frontend_API_Specification.md](../analyse/CoinKeeper_Frontend_API_Specification.md) - Техническая спецификация API для frontend разработки
+- [CoinKeeper_Backend_Implementation_Plan.md](../analyse/CoinKeeper_Backend_Implementation_Plan.md) - Детальный план реализации для подготовки backend к frontend разработке
 
 ## What Has Been Analyzed
 
@@ -68,6 +72,20 @@
     - Comprehensive analysis of the first implemented feature (financial operations management)
     - Evaluation of strengths and weaknesses
     - Recommendations for user experience improvements
+
+11. **Planned Operations Implementation (July 2025)**
+    - Full PlannedOperation entity with comprehensive field set
+    - PlannedOperationsJob background service with Hangfire integration
+    - Extended API with execute, pause, resume, preview endpoints
+    - Complete PlannedOperationValidator with validation rules
+    - FrequencyType enum supporting Daily, Weekly, Monthly, Yearly periods
+
+12. **Frontend Readiness Planning (July 24, 2025)**
+    - Created comprehensive API specification for frontend development
+    - Detailed implementation plan with 2-section approach (critical vs additional features)
+    - Defined clear criteria for backend readiness for frontend development
+    - Established timeline: 7 days for critical features, additional features can be developed in parallel
+    - Documented all required API endpoints, data structures, error codes, and authentication patterns
 
 ## What's Left to Analyze
 
@@ -145,10 +163,10 @@
 6. **Import/Export Functionality**
 7. **Data Visualization**
 
-## Identified Issues
+## Identified Issues (Updated July 24, 2025)
 
-1. **Operation Type Implementation**: The Operation entity now has an OperationType enum (Income/Expense) to distinguish between income and expense
-2. **Empty Operation Validator**: OperationValidator class exists but contains no validation rules
+1. **Operation Type Implementation**: ✅ RESOLVED - The Operation entity now has an OperationType enum (Income/Expense) to distinguish between income and expense
+2. **Operation Validator**: ✅ RESOLVED - OperationValidator now contains comprehensive validation rules
 3. **API Routes**: Routes are partially standardized but don't fully follow REST conventions
 4. **Missing Filtering and Pagination**: No support for filtering and pagination in list endpoints
 5. **Documentation**: No XML comments for API documentation
@@ -156,6 +174,8 @@
 7. **Manual Deployment**: No automated deployment from CI/CD pipeline to production environment
 8. **Limited Account Types**: AccountType enum contains only two values (Cash, Card)
 9. **Missing Currency Support**: No support for different currencies in accounts and operations
+10. **NEW: Missing AccountId validation**: OperationValidator lacks AccountId validation rule
+11. **NEW: Timezone handling**: PlannedOperationsJob doesn't account for user timezones
 
 **Note**: Connection strings and JWT options are intentionally empty in appsettings.json as they are stored in environment variables and user secrets, following security best practices.
 
@@ -208,7 +228,54 @@
 
 ## Next Development Tasks
 
-Based on the latest analysis (CoinKeeper_Analyse_22_05_25.md), the following tasks have been identified for implementation:
+**UPDATED PRIORITY (July 24, 2025)**: Based on frontend readiness requirements, tasks have been reorganized into critical and additional sections.
+
+### СЕКЦИЯ 1: Критически необходимые задачи для frontend (1-2 дня)
+
+1. **Исправление валидации операций**:
+   - Добавить валидацию AccountId в OperationValidator
+   - Проверить существование счета и принадлежность пользователю
+
+2. **Улучшение обработки часовых поясов**:
+   - Добавить поле TimeZone в модель User
+   - Исправить PlannedOperationsJob для корректной работы с часовыми поясами
+
+3. **Добавление транзакций в фоновые задачи**:
+   - Обернуть выполнение плановых операций в транзакции
+   - Обеспечить атомарность операций
+
+### СЕКЦИЯ 2: Базовая функциональность для frontend (2-3 дня)
+
+1. **Реализация фильтрации и пагинации**:
+   - Создать базовые DTO для пагинации и фильтрации
+   - Добавить поддержку во все списочные эндпоинты
+   - Реализовать расширенную фильтрацию операций
+
+2. **Расширение типов счетов**:
+   - Добавить новые типы: Deposit, Credit, Investment, Savings, Cryptocurrency
+   - Обновить валидацию и маппинги
+
+3. **Добавление поддержки валют**:
+   - Создать enum Currency (RUB, USD, EUR, GBP, CNY)
+   - Добавить поле Currency в модели Account и Operation
+   - Создать соответствующие миграции
+
+### СЕКЦИЯ 3: API стандартизация (1-2 дня)
+
+1. **Единый формат ответов API**:
+   - Создать ApiResponse<T> для стандартизации ответов
+   - Обновить все контроллеры
+   - Стандартизировать коды ошибок
+
+2. **Расширение эндпоинтов для frontend**:
+   - Добавить эндпоинты сводки, поиска, статистики
+   - Улучшить документацию Swagger
+
+**🎯 ТОЧКА ГОТОВНОСТИ ДЛЯ FRONTEND: После выполнения Секций 1-3 (7 дней)**
+
+### СЕКЦИЯ 4-5: Дополнительная функциональность (параллельно с frontend)
+
+Based on the previous analysis (CoinKeeper_Analyse_22_05_25.md), the following tasks remain for enhanced functionality:
 
 ### Критические улучшения
 
@@ -249,11 +316,11 @@ Based on the latest analysis (CoinKeeper_Analyse_22_05_25.md), the following tas
 
 ### Архитектурные улучшения
 
-1. **Реализация плановых платежей**:
-   - Создать модель PlannedOperation
-   - Создать PlannedOperationCrudHandler для управления плановыми платежами
-   - Реализовать PlannedOperationController с CRUD-операциями
-   - Создать фоновый сервис для автоматического выполнения плановых платежей
+1. **Реализация плановых платежей**: ✅ ВЫПОЛНЕНО (Июль 2025)
+   - ✅ Создать модель PlannedOperation
+   - ✅ Создать PlannedOperationCrudHandler для управления плановыми платежами
+   - ✅ Реализовать PlannedOperationController с CRUD-операциями
+   - ✅ Создать фоновый сервис для автоматического выполнения плановых платежей
 
 2. **Реализация отложенных средств**:
    - Добавить поле SavingsAmount в модель Account
