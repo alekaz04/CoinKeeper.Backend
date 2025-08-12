@@ -21,6 +21,9 @@ public class OperationValidator : AbstractValidator<OperationCreateDto>
         RuleFor(x => x.CategoryId)
             .NotEmpty().WithMessage("Категория должна быть указана");
 
+        RuleFor(x => x.AccountId)
+            .NotEmpty().WithMessage("Счёт должен быть указан");
+
         RuleFor(x => x.OperationType)
             .IsInEnum().WithMessage("Указан некорректный тип операции");
     }

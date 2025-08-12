@@ -18,7 +18,7 @@ public class PlannedOperationMapper : Profile
         // Маппинг для конвертации планового платежа в операцию
         CreateMap<PlannedOperation, Operation>()
             .ForMember(x => x.Id, opt => opt.MapFrom(x => Guid.NewGuid()))
-            .ForMember(x => x.OperationTime, opt => opt.MapFrom(x => DateTimeOffset.Now))
+            .ForMember(x => x.OperationTime, opt => opt.MapFrom(x => DateTimeOffset.UtcNow))
             .ForMember(x => x.Description, opt => opt.MapFrom(x => $"Автоматическое выполнение: {x.Name}"));
 
         // Маппинг для статуса планового платежа
