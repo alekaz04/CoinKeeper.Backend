@@ -32,7 +32,7 @@ WORKDIR /
 # Собираем EF Bundle
 RUN dotnet ef migrations bundle -s ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj \
     -p ./src/Common/CoinKeeper.Infrastructure/CoinKeeper.Infrastructure.csproj \
-    -c DataContext --self-contained --force
+    -c DataContext --force
 
 # List contents of the bundle directory for debugging
 RUN ls -la /efbundle
