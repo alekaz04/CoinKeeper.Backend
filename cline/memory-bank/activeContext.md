@@ -47,18 +47,20 @@ The project is in the early stages of development, and my analysis is focused on
 
 ## Recent Code Analysis
 
-As of May 22, 2025, I've analyzed the following implementations:
+As of August 14, 2025, I've analyzed the following implementations:
 
 1. **Project Structure**: Evaluated the solution structure with API, Authentication, Finance, and Common projects
-2. **Entity Models**: Assessed the models for User, Category, Operation, and Account entities
-3. **Database Schema**: Reviewed the initial migration creating the User, Category, Operation, and Account tables with relationships
-4. **API Implementation**: Analyzed the CRUD endpoints for operations, categories, and accounts
-5. **Authentication Framework**: Evaluated the JWT authentication implementation
+2. **Entity Models**: Assessed the models for User, Category, Operation, Account, and PlannedOperation entities
+3. **Database Schema**: Reviewed migrations including the PlannedOperation implementation
+4. **API Implementation**: Analyzed the CRUD endpoints for operations, categories, accounts, and planned operations
+5. **Authentication Framework**: Evaluated the JWT authentication implementation with refresh tokens
 6. **Error Handling**: Assessed the middleware for consistent error responses
 7. **Swagger Documentation**: Reviewed the API documentation setup
-8. **CI/CD Pipeline**: Analyzed GitHub Actions workflows for dev and release branches
+8. **CI/CD Pipeline**: Analyzed GitHub Actions workflows for dev and release branches with GitHub Container Registry
 9. **Balance Calculation**: Evaluated the implementation of balance calculation for accounts
-10. **Background Services**: Analyzed the RecalculationAllUsersBalanceHostedService for periodic balance recalculation
+10. **Background Services**: Analyzed Hangfire integration and PlannedOperationsJob for automatic execution
+11. **Planned Operations**: Comprehensive analysis of the planned operations feature with full CRUD and automation
+12. **README Update**: Updated project documentation to reflect current state and development priorities
 
 ## Текущая инфраструктура
 
