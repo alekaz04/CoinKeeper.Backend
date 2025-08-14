@@ -32,7 +32,10 @@ WORKDIR /
 # Собираем EF Bundle
 RUN dotnet ef migrations bundle -s ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj \
     -p ./src/Common/CoinKeeper.Infrastructure/CoinKeeper.Infrastructure.csproj \
-    -c DataContext --self-contained -r linux-arm64 --force
+    -c DataContext --self-contained --force
+
+# List contents of the bundle directory for debugging
+RUN ls -la /efbundle
 
 # Production stage: минимальный образ для запуска
 FROM mcr.microsoft.com/dotnet/runtime:9.0 AS runtime
