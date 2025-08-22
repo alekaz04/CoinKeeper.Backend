@@ -1,4 +1,4 @@
-﻿namespace CoinKeeper.Common.Domain.Pagination;
+namespace CoinKeeper.Common.Domain.Pagination;
 
 public class PaginationRequest
 {
