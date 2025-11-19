@@ -1,16 +1,16 @@
-name: CoinKeeper dev
+name: CoinKeeper Dev CI/CD
 
 on:
   push:
-    branches: [ dev ]
+    branches: [dev]
 
 jobs:
   build-and-publish:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -23,14 +23,17 @@ jobs:
       - name: Build project
         run: dotnet build ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj --no-restore -warnaserror
 
-      - name: Install dotnet-ef tool
-        run: dotnet tool install --global dotnet-ef
-
-      - name: Add dotnet tools to PATH
-        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+      - name: Install dotnet-ef as local tool
+        run: dotnet tool install --tool-path ./tools dotnet-ef
 
       - name: Check for pending EF Core migrations
-        run: dotnet ef migrations has-pending-model-changes --project ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj
+        run: ./tools/dotnet-ef migrations has-pending-model-changes --project ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj
+
+      - name: Set up QEMU for ARM emulation
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3  # Обновляем до версии 3
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -39,15 +42,63 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GT_PAT }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
       # Сборка и публикация Docker-образа для миграций
-      - name: Build migration Docker image
-        run: |
-          docker buildx build --platform linux/arm64 -f ./src/Common/CoinKeeper.Infrastructure/Dockerfile -t ghcr.io/alekaz04/coinkeeper/migration-bundle:dev --push .
+      - name: Build and push migration Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./src/Common/CoinKeeper.Infrastructure/Dockerfile
+          platforms: linux/arm64
+          push: true
+          tags: |
+            ghcr.io/alekaz04/mock-api/migration-bundle:dev
+          cache-from: type=registry,ref=ghcr.io/alekaz04/coinkeeper-api/migration-bundle:buildcache
+          cache-to: type=registry,ref=ghcr.io/alekaz04/coinkeeper-api/migration-bundle:buildcache,mode=max
 
       # Сборка и публикация Docker-образа для основного API
-      - name: Build backend Docker image
-        run: |
-          docker buildx build --platform linux/arm64 -f ./src/CoinKeeper.Backend.Api/Dockerfile -t ghcr.io/alekaz04/coinkeeper/backend:dev --push .
+      - name: Build and push backend Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./src/CoinKeeper.Backend.Api/Dockerfile
+          platforms: linux/arm64
+          push: true
+          tags: |
+            ghcr.io/alekaz04/mock-api/backend:dev
+          cache-from: type=registry,ref=ghcr.io/alekaz04/coinkeeper-api/backend:buildcache
+          cache-to: type=registry,ref=ghcr.io/alekaz04/coinkeeper-api/backend:buildcache,mode=max
+
+  deploy-to-raspberry:
+    runs-on: ubuntu-latest
+    needs: build-and-publish
+    if: success()
+
+    steps:
+      - name: Deploy to Raspberry Pi
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.RASPBERRY_SSH_HOST }}
+          username: ${{ secrets.RASPBERRY_SSH_USER }}
+          password: ${{ secrets.RASPBERRY_SSH_PASSWORD }}
+          port: ${{ secrets.RASPBERRY_SSH_PORT }}
+          script: |
+            # Переходим в директорию проекта
+            cd /home/bl-server/dev/coinkeeper-api/CoinKeeper.Infrastructure/Local
+
+            # Останавливаем текущие контейнеры
+            echo "Останавливаем контейнеры..."
+            docker compose -f main.yml -p coinkeeper-dev down
+
+            # Pull последнего образа
+            echo "Загружаем последний образ..."
+            docker compose -f main.yml -p coinkeeper-dev pull
+
+            # Запускаем контейнеры
+            echo "Запускаем контейнеры..."
+            docker compose -f main.yml -p coinkeeper-dev up -d --remove-orphans
+
+            # Чистим старые образы
+            echo "Очистка старых образов..."
+            docker image prune -af
+
+            echo "Деплой завершен успешно!"
