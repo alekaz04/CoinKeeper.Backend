@@ -16,6 +16,13 @@
 - [CoinKeeper_Frontend_API_Specification.md](../analyse/CoinKeeper_Frontend_API_Specification.md) - Техническая спецификация API для frontend разработки
 - [CoinKeeper_Backend_Implementation_Plan.md](../analyse/CoinKeeper_Backend_Implementation_Plan.md) - Детальный план реализации для подготовки backend к frontend разработке
 
+**NEW: Frontend Memory Bank Created (November 21, 2025)**:
+- Создан полный банк памяти для Angular фронтенд-проекта в папке `cline/memory-bank-frontend/`
+- Задокументированы все API эндпоинты с TypeScript интерфейсами
+- Спланирована архитектура Angular-приложения
+- Определены паттерны проектирования и технологический стек
+- Составлен детальный план разработки по фазам
+
 ## What Has Been Analyzed
 
 1. **Project Structure**

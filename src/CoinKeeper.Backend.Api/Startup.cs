@@ -29,6 +29,19 @@ public class Startup
     {
         services.AddControllers();
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy", policy =>
+            {
+                string[] origins = Configuration.GetSection("CorsOrigins").Get<string[]>() ?? [];
+
+                policy.WithOrigins(origins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+        });
+
         services.AddCommon(Configuration)
             .AddFinance()
             .AddAuth(Configuration)
@@ -48,6 +61,8 @@ public class Startup
         app.UseSwagger();
 
         app.UseErrorMiddleware();
+
+        app.UseCors("CorsPolicy");
 
         app.UseCoinKeeperHangfire();
 
