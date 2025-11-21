@@ -60,7 +60,7 @@ jobs:
           port: ${{ secrets.RASPBERRY_SSH_PORT }}
           script: |
             # Переходим в директорию проекта
-            cd /home/bl-server/dev/coinkeeper-api/CoinKeeper.Infrastructure/Local
+            cd /home/bl-server/dev/coinkeeper-api/CoinKeeper.Infrastructure/DockerCompose/Local
 
             # Останавливаем текущие контейнеры
             echo "Останавливаем контейнеры..."
