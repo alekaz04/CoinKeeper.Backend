@@ -33,16 +33,16 @@ jobs:
       # Простая нативная сборка миграций
       - name: Build and push migration image
         run: |
-          docker build -t ghcr.io/alekaz04/mock-api/migration-bundle:dev \
+          docker build -t ghcr.io/alekaz04/coinkeeper/migration-bundle:dev \
             -f ./src/Common/CoinKeeper.Infrastructure/Dockerfile .
-          docker push ghcr.io/alekaz04/mock-api/migration-bundle:dev
+          docker push ghcr.io/alekaz04/coinkeeper/migration-bundle:dev
 
       # Простая нативная сборка API
       - name: Build and push backend image
         run: |
-          docker build -t ghcr.io/alekaz04/mock-api/backend:dev \
+          docker build -t ghcr.io/alekaz04/coinkeeper/backend:dev \
             -f ./src/CoinKeeper.Backend.Api/Dockerfile .
-          docker push ghcr.io/alekaz04/mock-api/backend:dev
+          docker push ghcr.io/alekaz04/coinkeeper/backend:dev
 
 
   deploy-to-raspberry:
@@ -72,7 +72,7 @@ jobs:
 
             # Запускаем контейнеры
             echo "Запускаем контейнеры..."
-            docker compose -f main.yml -p coinkeeper-dev up -d --remove-orphans
+            docker compose -f main.yml -p coinkeeper-dev up -d
 
             # Чистим старые образы
             echo "Очистка старых образов..."
