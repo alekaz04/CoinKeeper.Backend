@@ -23,11 +23,10 @@ jobs:
       - name: Build project
         run: dotnet build ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj --no-restore -warnaserror
 
-      - name: Install or update dotnet-ef as local tool
+      - name: Install dotnet-ef as local tool
         run: |
-          dotnet tool update --tool-path ./tools dotnet-ef || \
+          rm -rf ./tools
           dotnet tool install --tool-path ./tools dotnet-ef
-
 
       - name: Check for pending EF Core migrations
         run: ./tools/dotnet-ef migrations has-pending-model-changes --project ./src/CoinKeeper.Backend.Api/CoinKeeper.Backend.Api.csproj
